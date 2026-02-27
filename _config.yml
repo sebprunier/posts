@@ -1,0 +1,33 @@
+title: "Posts"
+description: "Retours d'expérience tech"
+author: "Sébastien Prunier"
+
+url: "https://sebprunier.github.io"
+baseurl: "/posts"
+
+theme: minima
+minima:
+  skin: classic
+  date_format: "%d %B %Y"
+
+# Build
+markdown: kramdown
+highlighter: rouge
+permalink: /:year/:month/:day/:title/
+
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Social (optionnel — décommenter et remplir si souhaité)
+# minima:
+#   social_links:
+#     - { platform: github, user_url: "https://github.com/sebprunier" }
+
+# Exclure les fichiers non publiés
+exclude:
+  - THEME.md
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - .gitignore

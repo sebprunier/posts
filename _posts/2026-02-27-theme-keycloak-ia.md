@@ -1,4 +1,10 @@
-# Créer un thème Keycloak avec l'IA — retour d'expérience
+---
+layout: post
+title: "Créer un thème Keycloak avec l'IA — retour d'expérience"
+date: 2026-02-27
+categories: [keycloak, ia]
+tags: [keycloak, claude-code, freemarker, clever-cloud, spring-boot]
+---
 
 > Cet article raconte comment nous avons créé un thème Keycloak personnalisé pour le backoffice de DICRIM numérique, en utilisant Claude Code comme assistant. De la première question aux derniers bugs en prod, on vous raconte tout — y compris les erreurs.
 
