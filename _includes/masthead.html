@@ -32,7 +32,11 @@
           {% if site.active_lang == 'fr' %}
             <span class="masthead__lang-current">🇫🇷 FR</span>
             <span class="masthead__lang-sep">·</span>
-            <a class="masthead__lang-link" href="{{ site.baseurl }}/en{{ page.url }}">🇬🇧 EN</a>
+            <a class="masthead__lang-link" id="masthead-en-link" href="#">🇬🇧 EN</a>
+            <script>
+              document.getElementById('masthead-en-link').href =
+                window.location.href.replace('{{ site.baseurl }}/', '{{ site.baseurl }}/en/');
+            </script>
           {% else %}
             <a class="masthead__lang-link" id="masthead-fr-link" href="#">🇫🇷 FR</a>
             <span class="masthead__lang-sep">·</span>
