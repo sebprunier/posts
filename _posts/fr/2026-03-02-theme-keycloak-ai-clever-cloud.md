@@ -2,7 +2,7 @@
 layout: single
 title: "Créer un thème Keycloak avec l'IA, déployé sur Clever Cloud"
 excerpt: "Cet article raconte comment j'ai créé et déployé sur Clever Cloud un thème Keycloak personnalisé pour le backoffice du DICRIM numérique, en utilisant Claude Code comme assistant."
-date: 2026-02-27
+date: 2026-03-02
 lang: fr
 categories: [keycloak, ia]
 tags: [keycloak, claude-code, freemarker, clever-cloud, spring-boot]
