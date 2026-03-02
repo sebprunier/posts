@@ -1,0 +1,26 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
+.footer-social {
+  text-align: center;
+  margin-bottom: 1em;
+
+  a {
+    display: inline-block;
+    margin: 0 0.4em;
+    font-size: 1.4em;
+    color: inherit;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
