@@ -7,6 +7,33 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
+.masthead__lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.75em;
+  font-weight: bold;
+  letter-spacing: 0.05em;
+  margin-left: 0.75em;
+
+  .masthead__lang-current {
+    opacity: 1;
+  }
+
+  .masthead__lang-sep {
+    opacity: 0.4;
+  }
+
+  .masthead__lang-link {
+    opacity: 0.45;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 1;
+    }
+  }
+}
+
 .lang-switcher {
   display: inline-flex;
   align-items: center;
