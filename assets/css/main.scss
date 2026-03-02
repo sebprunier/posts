@@ -7,14 +7,16 @@
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
 @import "minimal-mistakes";
 
-.masthead__lang-switcher {
+li.masthead__lang-switcher {
   display: flex;
   align-items: center;
   gap: 0.3em;
   font-size: 0.75em;
   font-weight: bold;
   letter-spacing: 0.05em;
-  margin-left: 0.75em;
+  border-left: 1px solid rgba(255,255,255,0.2);
+  padding-left: 0.75em;
+  margin-left: 0.25em;
 
   .masthead__lang-current {
     opacity: 1;

@@ -21,6 +21,25 @@
               >{{ link.title }}</a>
             </li>
           {%- endfor -%}
+          <li class="masthead__menu-item masthead__lang-switcher">
+            {% if site.active_lang == 'fr' %}
+              <span class="masthead__lang-current">🇫🇷 FR</span>
+              <span class="masthead__lang-sep">·</span>
+              <a class="masthead__lang-link" id="masthead-en-link" href="#">🇬🇧 EN</a>
+              <script>
+                document.getElementById('masthead-en-link').href =
+                  window.location.href.replace('{{ site.baseurl }}/', '{{ site.baseurl }}/en/');
+              </script>
+            {% else %}
+              <a class="masthead__lang-link" id="masthead-fr-link" href="#">🇫🇷 FR</a>
+              <span class="masthead__lang-sep">·</span>
+              <span class="masthead__lang-current">🇬🇧 EN</span>
+              <script>
+                document.getElementById('masthead-fr-link').href =
+                  window.location.href.replace('/en/', '/');
+              </script>
+            {% endif %}
+          </li>
         </ul>
         {% if site.search == true %}
         <button class="search__toggle" type="button">
@@ -28,25 +47,6 @@
           <i class="fas fa-search"></i>
         </button>
         {% endif %}
-        <div class="masthead__lang-switcher">
-          {% if site.active_lang == 'fr' %}
-            <span class="masthead__lang-current">🇫🇷 FR</span>
-            <span class="masthead__lang-sep">·</span>
-            <a class="masthead__lang-link" id="masthead-en-link" href="#">🇬🇧 EN</a>
-            <script>
-              document.getElementById('masthead-en-link').href =
-                window.location.href.replace('{{ site.baseurl }}/', '{{ site.baseurl }}/en/');
-            </script>
-          {% else %}
-            <a class="masthead__lang-link" id="masthead-fr-link" href="#">🇫🇷 FR</a>
-            <span class="masthead__lang-sep">·</span>
-            <span class="masthead__lang-current">🇬🇧 EN</span>
-            <script>
-              document.getElementById('masthead-fr-link').href =
-                window.location.href.replace('/en/', '/');
-            </script>
-          {% endif %}
-        </div>
         <button class="greedy-nav__toggle hidden" type="button">
           <span class="visually-hidden">{{ site.data.ui-text[site.locale].menu_label | default: "Toggle menu" }}</span>
           <div class="navicon"></div>
@@ -56,3 +56,16 @@
     </div>
   </div>
 </div>
+<script>
+  window.addEventListener('load', function () {
+    if (window.innerWidth >= 768) return;
+    var vl = document.querySelector('.greedy-nav .visible-links');
+    var hl = document.querySelector('.greedy-nav .hidden-links');
+    var toggle = document.querySelector('.greedy-nav__toggle');
+    if (!vl || !hl || !toggle) return;
+    Array.from(vl.children).reverse().forEach(function (li) {
+      hl.insertBefore(li, hl.firstChild);
+    });
+    toggle.classList.remove('hidden');
+  });
+</script>
