@@ -24,6 +24,11 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
+# Tags
+tag_archive:
+  type: liquid
+  path: /tags/
+
 # Layout par défaut pour tous les posts
 defaults:
   - scope:
@@ -33,6 +38,9 @@ defaults:
       layout: single
       read_time: true
       show_date: true
+
+include:
+  - _pages
 
 exclude:
   - README.md
