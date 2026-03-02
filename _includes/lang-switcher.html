@@ -1,0 +1,13 @@
+<div class="lang-switcher">
+  {% if site.active_lang == 'fr' %}
+    <span class="lang-switcher__current">🇫🇷 FR</span>
+    <a class="lang-switcher__link" href="{{ site.baseurl }}/en{{ page.url }}">🇬🇧 EN</a>
+  {% else %}
+    <a class="lang-switcher__link" id="lang-fr-link" href="#">🇫🇷 FR</a>
+    <span class="lang-switcher__current">🇬🇧 EN</span>
+    <script>
+      document.getElementById('lang-fr-link').href =
+        window.location.href.replace('/en/', '/');
+    </script>
+  {% endif %}
+</div>

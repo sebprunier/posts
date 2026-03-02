@@ -2,6 +2,6 @@
 layout: tags
 title: "Tags"
 permalink: /tags/
-lang: fr
-locale: "fr"
+lang: en
+locale: "en-US"
 ---

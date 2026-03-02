@@ -1,0 +1,11 @@
+{% assign d    = include.date | date: '%-d' %}
+{% assign m    = include.date | date: '%-m' | minus: 1 %}
+{% assign y    = include.date | date: '%Y' %}
+
+{% if include.lang == 'en' %}
+  {% assign months = "January,February,March,April,May,June,July,August,September,October,November,December" | split: "," %}
+  {{- months[m] }} {{ d }}, {{ y -}}
+{% else %}
+  {% assign months = "janvier,février,mars,avril,mai,juin,juillet,août,septembre,octobre,novembre,décembre" | split: "," %}
+  {{- d }} {{ months[m] }} {{ y -}}
+{% endif %}

@@ -1,4 +1,4 @@
-title: "Sebprunier's posts"
+title: "sebprunier/blog"
 description: "Retours d'expérience tech"
 author:
   name: "Sébastien Prunier"
@@ -8,8 +8,16 @@ baseurl: "/posts"
 
 remote_theme: mmistakes/minimal-mistakes
 minimal_mistakes_skin: "air"
+locale: "fr"
+
+# Multilingue (jekyll-polyglot)
+languages: ["fr", "en"]
+default_lang: "fr"
+exclude_from_localization: ["assets"]
+parallel_localization: false
 
 plugins:
+  - jekyll-polyglot
   - jekyll-remote-theme
   - jekyll-feed
   - jekyll-sitemap
@@ -29,8 +37,8 @@ tag_archive:
   type: liquid
   path: /tags/
 
-# Layout par défaut pour tous les posts
 defaults:
+  # Layout pour tous les posts
   - scope:
       path: ""
       type: posts
@@ -38,6 +46,15 @@ defaults:
       layout: single
       read_time: true
       show_date: true
+  # Locale par langue
+  - scope:
+      path: "_posts/fr"
+    values:
+      locale: "fr"
+  - scope:
+      path: "_posts/en"
+    values:
+      locale: "en-US"
 
 include:
   - _pages

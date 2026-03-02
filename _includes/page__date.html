@@ -1,0 +1,6 @@
+{% assign locale = page.locale | default: site.locale %}
+{% if page.last_modified_at %}
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[locale].date_label | default: "Updated:" }}</strong> <time class="dt-published" datetime="{{ page.last_modified_at | date: "%Y-%m-%d" }}">{% include custom_date.html date=page.last_modified_at lang=page.lang %}</time></p>
+{% elsif page.date %}
+  <p class="page__date"><strong><i class="fas fa-fw fa-calendar-alt" aria-hidden="true"></i> {{ site.data.ui-text[locale].date_label | default: "Updated:" }}</strong> <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}">{% include custom_date.html date=page.date lang=page.lang %}</time></p>
+{% endif %}
