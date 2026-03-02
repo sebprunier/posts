@@ -37,5 +37,8 @@ tags: [tag1, tag2]
 
 ## Thème
 
-Minima (thème Jekyll par défaut, supporté nativement par GitHub Pages).
+**Minimal Mistakes** (`mmistakes/minimal-mistakes`), skin `air`, chargé via `jekyll-remote-theme`.
 Config dans `_config.yml`.
+
+Les posts utilisent `layout: single` (défini automatiquement via `defaults` dans `_config.yml` — pas besoin de le préciser dans le front matter).
+L'index utilise `layout: home`.

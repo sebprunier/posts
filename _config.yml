@@ -1,14 +1,19 @@
 title: "Posts"
 description: "Retours d'expérience tech"
-author: "Sébastien Prunier"
+author:
+  name: "Sébastien Prunier"
 
 url: "https://sebprunier.github.io"
 baseurl: "/posts"
 
-theme: minima
-minima:
-  skin: classic
-  date_format: "%d %B %Y"
+remote_theme: mmistakes/minimal-mistakes
+minimal_mistakes_skin: "air"
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-include-cache
 
 # Build
 markdown: kramdown
@@ -19,14 +24,17 @@ kramdown:
   input: GFM
   syntax_highlighter: rouge
 
-# Social (optionnel — décommenter et remplir si souhaité)
-# minima:
-#   social_links:
-#     - { platform: github, user_url: "https://github.com/sebprunier" }
+# Layout par défaut pour tous les posts
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: single
+      read_time: true
+      show_date: true
 
-# Exclure les fichiers non publiés
 exclude:
-  - THEME.md
   - README.md
   - Gemfile
   - Gemfile.lock

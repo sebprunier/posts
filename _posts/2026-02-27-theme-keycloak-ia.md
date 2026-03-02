@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: single
 title: "Créer un thème Keycloak avec l'IA — retour d'expérience"
 date: 2026-02-27
 categories: [keycloak, ia]
@@ -12,13 +12,11 @@ tags: [keycloak, claude-code, freemarker, clever-cloud, spring-boot]
 
 ## Le contexte
 
-[DICRIM numérique](https://www.clever.cloud/) est une application Spring Boot déployée sur **Clever Cloud** qui permet aux collectivités de créer et diffuser leur Document d'Information Communal sur les Risques Majeurs. L'authentification des utilisateurs du backoffice est gérée par l'addon **Managed Keycloak** de Clever Cloud (version 26.1.2).
+Le [DICRIM numérique](https://dicrim.territoires-prevention.fr/) est une application Spring Boot déployée sur **Clever Cloud** qui permet aux collectivités de créer et diffuser leur Document d'Information Communal sur les Risques Majeurs. L'authentification des utilisateurs du backoffice est gérée par l'addon **Managed Keycloak** de Clever Cloud (version 26.1.2).
 
 Par défaut, Keycloak affiche ses propres pages de connexion — fonctionnelles, mais génériques. L'objectif : les remplacer par des pages aux couleurs de DICRIM numérique pour une expérience cohérente.
 
-> 📸 **Capture d'écran** : page de login Keycloak par défaut (avant)
-
-> 📸 **Capture d'écran** : page de login DICRIM après personnalisation (après)
+![Page de login Keycloak par défaut]({{ "/assets/images/2026-02-27-theme-keycloak-ia/dicrim-login-page.png" | relative_url }})
 
 ---
 
@@ -108,11 +106,9 @@ cd keycloak && ./mvnw package
 La page de connexion reprend les codes visuels du backoffice avec un layout **split-screen** :
 
 - **Panneau gauche** : fond bleu marine (`#133478`), nom de l'application, icône
-- **Panneau droit** : formulaire sur fond clair, champs stylisés, bouton orange
+- **Panneau droit** : formulaire sur fond clair, champs stylisés, bouton bleu marine
 
-> 📸 **Capture d'écran** : la page de login DICRIM en plein écran (desktop)
-
-> 📸 **Capture d'écran** : la page de login DICRIM sur mobile (panneau gauche masqué)
+![Page de login DICRIM après personnalisation]({{ "/assets/images/2026-02-27-theme-keycloak-ia/dicrim-login-page-with-theme.png" | relative_url }})
 
 ### `template.ftl` : le layout maître
 
@@ -131,7 +127,7 @@ template.ftl          ← HTML commun, CSS, split-screen, alertes
 
 Chaque template appelle la macro en passant son titre et son contenu :
 
-```freemarker
+```
 <#import "template.ftl" as layout>
 <@layout.registrationLayout header=msg("loginAccountTitle")>
     <form action="${url.loginAction}" method="post">
@@ -155,19 +151,22 @@ Encountered ";", but was expecting one of these patterns: ".", "..", "?", ...
 
 **Cause** : le thème parent Keycloak utilise un pattern Freemarker avancé — les *body parameters* de macro — pour différencier les sections `header` et `form` dans un même template :
 
-```freemarker
+{% raw %}
+```html
 {{!-- Thème parent keycloak --}}
 <#macro registrationLayout ...; section>
     <#nested "header">   {{!-- appelle le bloc "header" du template appelant --}}
     <#nested "form">     {{!-- appelle le bloc "form" du template appelant --}}
 </#macro>
 ```
+{% endraw %}
 
 La syntaxe `; section` dans la *définition* d'une macro n'est pas supportée par la version de Freemarker embarquée dans KC 26.
 
 **Fix** : on change d'approche. Le titre (`header`) devient un simple paramètre string de la macro, et `<#nested>` gère le contenu unique :
 
-```freemarker
+{% raw %}
+```
 {{!-- Notre template.ftl --}}
 <#macro registrationLayout header="" ...>
     <h2>${header}</h2>
@@ -179,6 +178,7 @@ La syntaxe `; section` dans la *définition* d'une macro n'est pas supportée pa
     <form>...</form>
 </@layout.registrationLayout>
 ```
+{% endraw %}
 
 **Piège associé** : les templates du thème *parent* non surchargés (ex: `logout-confirm.ftl`) continuent d'utiliser l'ancien pattern `; section`. Ils chargent notre `template.ftl`, mais comme notre macro ne fournit pas de valeur à `section`, la variable est `null` et le template plante. **Chaque template parent qui utilise ce pattern doit être surchargé dans notre thème.**
 
@@ -198,13 +198,15 @@ Caused by: freemarker.core.InvalidReferenceException:
 
 **Fix** : l'opérateur `!` de Freemarker permet de définir une valeur par défaut en couvrant toute l'expression avec des parenthèses :
 
-```freemarker
+{% raw %}
+```
 {{!-- ❌ Plante si locale est absent --}}
 <html lang="${locale.currentLanguageTag}">
 
 {{!-- ✅ Valeur par défaut 'fr' si locale est absent --}}
 <html lang="${(locale.currentLanguageTag)!'fr'}">
 ```
+{% endraw %}
 
 > La subtilité : `${locale.currentLanguageTag!'fr'}` ne couvre que la *dernière étape* de l'expression. Si `locale` lui-même est absent, ça plante quand même. Il faut entourer l'expression entière de parenthèses : `${(locale.currentLanguageTag)!'fr'}`.
 
@@ -213,8 +215,6 @@ Caused by: freemarker.core.InvalidReferenceException:
 ### Bug #3 — Le thème account invisible dans l'admin KC
 
 Le thème `dicrim` n'apparaissait pas dans la liste des thèmes disponibles pour le **Account theme** dans `Realm settings → Themes`.
-
-> 📸 **Capture d'écran** : page Realm settings → Themes avec le thème dicrim visible uniquement pour Login et Email, absent pour Account
 
 **Cause** : la mauvaise valeur de `parent` dans `account/theme.properties`. En KC 26, le thème account natif s'appelle `keycloak.v3`. Si le parent déclaré n'existe pas, KC ignore silencieusement le thème dans la liste.
 
@@ -256,7 +256,7 @@ login/
 └── login-page-expired.ftl  ← session expirée
 ```
 
-> 📸 **Capture d'écran** : page de confirmation de logout avec le style DICRIM
+![Page de confirmation de logout avec le style DICRIM]({{ "/assets/images/2026-02-27-theme-keycloak-ia/dicrim-logout-with-theme.png" | relative_url }})
 
 ---
 
@@ -277,7 +277,7 @@ En revanche, KC permet d'injecter une feuille de style supplémentaire. Il suffi
 }
 ```
 
-> 📸 **Capture d'écran** : console account avec les couleurs DICRIM (header bleu, boutons bleus)
+![Account avec les couleurs DICRIM]({{ "/assets/images/2026-02-27-theme-keycloak-ia/dicrim-account-with-theme.png" | relative_url }})
 
 ---
 
@@ -290,8 +290,6 @@ Trois templates HTML aux couleurs DICRIM pour les emails transactionnels :
 - **`executeActions.ftl`** — actions requises demandées par un admin
 
 Un fichier `messages_fr.properties` traduit les sujets et corps des emails en français.
-
-> 📸 **Capture d'écran** : aperçu de l'email de réinitialisation de mot de passe
 
 ---
 
@@ -316,6 +314,8 @@ cd keycloak && ./mvnw package
 #    dans providers/ du FSBucket via la console Clever Cloud
 ```
 
+![FSBucket avec le JAR dans providers]({{ "/assets/images/2026-02-27-theme-keycloak-ia/dicrim-fsbucket.png" | relative_url }})
+
 ```
 # 3. Redémarrer l'addon Keycloak depuis la console Clever Cloud
 ```
@@ -327,9 +327,7 @@ cd keycloak && ./mvnw package
 #    Email theme   → dicrim
 ```
 
-> 📸 **Capture d'écran** : FSBucket avec le JAR dans providers/
-
-> 📸 **Capture d'écran** : Realm settings → Themes avec les 3 thèmes dicrim sélectionnés
+![Les 3 thèmes dicrim sélectionnés]({{ "/assets/images/2026-02-27-theme-keycloak-ia/dicrim-keycloak-config.png" | relative_url }})
 
 > **Avantage Clever Cloud** : pas besoin de lancer `kc.sh build` manuellement. Le rebuild Quarkus est géré par la plateforme au redémarrage de l'addon.
 
