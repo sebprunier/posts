@@ -10,7 +10,7 @@ remote_theme: mmistakes/minimal-mistakes
 minimal_mistakes_skin: "air"
 locale: "fr"
 
-# Multilingue (jekyll-polyglot)
+# Multilingual (jekyll-polyglot)
 languages: ["fr", "en"]
 default_lang: "fr"
 exclude_from_localization: ["assets"]
@@ -38,7 +38,7 @@ tag_archive:
   path: /tags/
 
 defaults:
-  # Layout pour tous les posts
+  # Default layout for all posts
   - scope:
       path: ""
       type: posts
@@ -46,7 +46,7 @@ defaults:
       layout: single
       read_time: true
       show_date: true
-  # Locale par langue
+  # Locale per language
   - scope:
       path: "_posts/fr"
     values:
