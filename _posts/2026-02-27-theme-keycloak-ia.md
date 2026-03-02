@@ -140,7 +140,7 @@ Chaque template appelle la macro en passant son titre et son contenu :
 
 ## Les bugs — parce qu'il y en a toujours
 
-### Bug #1 — `; section` : une syntaxe Freemarker non supportée
+### Bug #1 — `; section` : du code généré incorrect
 
 Premier déploiement du JAR, premier 500. Le log est sans appel :
 
@@ -149,11 +149,35 @@ Caused by: freemarker.core.ParseException: Syntax error in template "template.ft
 Encountered ";", but was expecting one of these patterns: ".", "..", "?", ...
 ```
 
-**Cause** : le thème parent Keycloak utilise un pattern Freemarker avancé — les *body parameters* de macro — pour différencier les sections `header` et `form` dans un même template :
+#### Les loop variables en Freemarker
+
+Keycloak 26 embarque **Freemarker 2.3.32**. Cette version supporte les [loop variables](https://freemarker.apache.org/docs/ref_directive_macro.html) — un mécanisme qui permet à une macro de passer des valeurs en retour vers son contenu imbriqué.
+
+La syntaxe standard : dans la **définition**, la macro émet des valeurs via `<#nested val>` ; dans l'**appel**, le template appelant les reçoit avec `; var` :
+
+```freemarker
+<%-- Définition : la macro passe une valeur à son contenu --%>
+<#macro registrationLayout>
+    <#nested "header">
+    <#nested "form">
+</#macro>
+
+<%-- Appel : le template reçoit la valeur dans la variable "section" --%>
+<@layout.registrationLayout ; section>
+    <#if section == "header"><h2>Titre</h2></#if>
+    <#if section == "form"><form>...</form></#if>
+</@layout.registrationLayout>
+```
+
+Le `; var` appartient à l'**appel** (`@`), pas à la définition (`#macro`).
+
+#### Le problème : Claude a mélangé les deux
+
+Claude a généré un `template.ftl` avec `; section` dans la **définition** de la macro — ce qui n'est pas du Freemarker valide :
 
 {% raw %}
 ```html
-{{!-- Thème parent keycloak --}}
+{{!-- Code généré — incorrect --}}
 <#macro registrationLayout ...; section>
     <#nested "header">   {{!-- appelle le bloc "header" du template appelant --}}
     <#nested "form">     {{!-- appelle le bloc "form" du template appelant --}}
@@ -161,9 +185,9 @@ Encountered ";", but was expecting one of these patterns: ".", "..", "?", ...
 ```
 {% endraw %}
 
-La syntaxe `; section` dans la *définition* d'une macro n'est pas supportée par la version de Freemarker embarquée dans KC 26.
+Le parser s'arrête à la colonne 106, là où il rencontre `;` dans un contexte où il ne l'attend pas. Ça arrive — l'IA a confondu la syntaxe de l'appelant avec celle du template, et aucun test local ne l'a rattrapé avant le déploiement.
 
-**Fix** : on change d'approche. Le titre (`header`) devient un simple paramètre string de la macro, et `<#nested>` gère le contenu unique :
+**Fix** : revenir à du Freemarker standard. Le titre (`header`) devient un paramètre string explicite de la macro, et `<#nested>` gère un seul bloc de contenu :
 
 {% raw %}
 ```
@@ -181,6 +205,8 @@ La syntaxe `; section` dans la *définition* d'une macro n'est pas supportée pa
 {% endraw %}
 
 **Piège associé** : les templates du thème *parent* non surchargés (ex: `logout-confirm.ftl`) continuent d'utiliser l'ancien pattern `; section`. Ils chargent notre `template.ftl`, mais comme notre macro ne fournit pas de valeur à `section`, la variable est `null` et le template plante. **Chaque template parent qui utilise ce pattern doit être surchargé dans notre thème.**
+
+> **Refs** : [Freemarker — directive `#macro` et loop variables](https://freemarker.apache.org/docs/ref_directive_macro.html) · [Keycloak 26 — personnalisation des thèmes](https://www.keycloak.org/ui-customization/themes)
 
 ---
 
