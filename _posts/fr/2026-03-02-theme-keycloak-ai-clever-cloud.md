@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Créer un thème Keycloak avec l'IA sur Clever Cloud — retour d'expérience"
+title: "Créer un thème Keycloak avec l'IA, déployé sur Clever Cloud"
 date: 2026-02-27
 lang: fr
 categories: [keycloak, ia]
