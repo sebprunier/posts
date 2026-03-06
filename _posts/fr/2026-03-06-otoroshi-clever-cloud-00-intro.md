@@ -68,7 +68,7 @@ C'est exactement ce que cette série illustre.
 
 ## Le fil rouge — Aux Alentours par MAIF
 
-La plupart des exemples de cette série s'appuient sur un projet réel : [**Aux Alentours par MAIF**](https://auxalentours.maif.fr), une application qui permet de découvrir les lieux et services autour de soi.
+La plupart des exemples de cette série s'appuient sur un projet réel : [**Aux Alentours par MAIF**](https://auxalentours.maif.fr), une application qui permet de consulter les risques naturels et technologiques à partir d'une adresse, et d'obtenir des conseils et solutions de prévention adaptés.
 
 L'infrastructure se compose de deux applications déployées sur Clever Cloud :
 

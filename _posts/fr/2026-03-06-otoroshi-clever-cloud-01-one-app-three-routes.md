@@ -16,7 +16,7 @@ Premier article de la [série Otoroshi + Clever Cloud]({{ "/2026/03/06/otoroshi-
 
 ## Aux Alentours par MAIF — le contexte
 
-[Aux Alentours par MAIF](https://auxalentours.maif.fr) est une application qui permet de découvrir les lieux et services autour de soi. L'infrastructure repose sur deux applications déployées sur Clever Cloud :
+[Aux Alentours par MAIF](https://auxalentours.maif.fr) est une application qui permet de consulter les risques naturels et technologiques à partir d'une adresse, et d'obtenir des conseils et solutions de prévention adaptés. L'infrastructure repose sur deux applications déployées sur Clever Cloud :
 
 - **Le site web** — `auxalentours.maif.fr`, l'interface utilisateur
 - **L'API** — le backend qui alimente le site et expose plusieurs types de données

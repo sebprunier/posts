@@ -68,7 +68,7 @@ That's exactly what this series illustrates.
 
 ## The running example — Aux Alentours par MAIF
 
-Most examples in this series are based on a real project: [**Aux Alentours par MAIF**](https://auxalentours.maif.fr), an application that helps users discover places and services nearby.
+Most examples in this series are based on a real project: [**Aux Alentours par MAIF**](https://auxalentours.maif.fr), an application that lets users consult natural and technological risks from a given address, and get tailored prevention advice and solutions.
 
 The infrastructure consists of two applications deployed on Clever Cloud:
 

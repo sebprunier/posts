@@ -16,7 +16,7 @@ First article in the [Otoroshi + Clever Cloud series]({{ "/2026/03/06/otoroshi-c
 
 ## Aux Alentours par MAIF — context
 
-[Aux Alentours par MAIF](https://auxalentours.maif.fr) is an application that helps users discover places and services nearby. The infrastructure consists of two applications deployed on Clever Cloud:
+[Aux Alentours par MAIF](https://auxalentours.maif.fr) is an application that lets users consult natural and technological risks from a given address, and get tailored prevention advice and solutions. The infrastructure consists of two applications deployed on Clever Cloud:
 
 - **The web frontend** — `auxalentours.maif.fr`, the user interface
 - **The API** — the backend that powers the frontend and exposes several types of data
