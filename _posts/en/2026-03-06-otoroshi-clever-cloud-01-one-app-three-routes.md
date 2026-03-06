@@ -1,0 +1,163 @@
+---
+layout: single
+title: "Last Night Otoroshi Saved My Life — #1: one app, three exposures"
+excerpt: "The Aux Alentours par MAIF API deployed on Clever Cloud, exposed through three radically different Otoroshi routes: API key-secured endpoint, public documentation, and tile API."
+date: 2026-03-06
+lang: en
+categories: [otoroshi, clever-cloud]
+tags: [otoroshi, clever-cloud, api-gateway, api-management, api-keys, routing]
+---
+
+{% include lang-switcher.html %}
+
+First article in the [Otoroshi + Clever Cloud series]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }}). We start with the foundational use case: a single backend application, exposed three different ways — without touching the code.
+
+---
+
+## Aux Alentours par MAIF — context
+
+[Aux Alentours par MAIF](https://auxalentours.maif.fr) is an application that helps users discover places and services nearby. The infrastructure consists of two applications deployed on Clever Cloud:
+
+- **The web frontend** — `auxalentours.maif.fr`, the user interface
+- **The API** — the backend that powers the frontend and exposes several types of data
+
+Otoroshi is deployed on a Clever Cloud JVM scaler — a custom installation, because when the platform was first set up, the Otoroshi add-on did not exist yet. It sits in front of the entire platform: both the web frontend and the API.
+
+The applications are deployed on internal domains (`*.innovation.maif`) and are never directly accessible. To enforce this, Otoroshi uses the **[exchange protocol](https://maif.github.io/otoroshi/manual/topics/otoroshi-protocol.html)**: a mechanism that allows backends to verify that incoming requests have actually passed through Otoroshi, and reject them otherwise. Worth noting: Clever Cloud now offers [Request Flow](https://www.clever.cloud/developers/doc/develop/request-flow/), a native feature that serves the same purpose without having to implement the challenge on the application side.
+
+<pre class="mermaid">
+graph LR
+    Users["👤 Users"]
+    Partners["🤝 Partners"]
+    Oto["⚙️ Otoroshi<br/>Clever Cloud JVM scaler"]
+    Site["🌐 Web frontend<br/>Clever Cloud"]
+    API["🖥️ API<br/>Clever Cloud"]
+
+    Users --> Oto
+    Partners -->|"dedicated API key"| Oto
+    Oto -->|"exchange protocol"| Site
+    Oto -->|"exchange protocol"| API
+</pre>
+
+This article focuses on the API. It exposes three very different profiles: a secured REST API, public documentation, and a map tile service. Three reasons not to expose them the same way.
+
+---
+
+## Three routes, one application
+
+In Otoroshi, each **route** defines a frontend (incoming domain + path) and a backend (target). There is no need to create a separate backend object: the target is declared directly in the route. All three routes point to the same Clever Cloud application (`app-xxxxxxxx.innovation.maif`), but with different configurations.
+
+<pre class="mermaid">
+graph TD
+    R1["API route<br/>api.auxalentours.innovation.maif<br/>🔑 API key required"]
+    R2["Doc route<br/>api.auxalentours.innovation.maif/doc<br/>🌍 Public access"]
+    R3["Tiles route<br/>tiles.auxalentours.innovation.maif<br/>🌍 Public access"]
+    Backend["🖥️ app-xxxxxxxx.innovation.maif<br/>Aux Alentours par MAIF API"]
+
+    R1 --> Backend
+    R2 --> Backend
+    R3 --> Backend
+</pre>
+
+### Plugins common to all routes
+
+Four plugins are present on each route:
+
+- **`OverrideHost`** — replaces the `Host` header of the outgoing request with the backend hostname. Required for the application to receive the correct host.
+- **`ForceHttpsTraffic`** — automatically redirects HTTP requests to HTTPS.
+- **`DisableHttp10`** — rejects HTTP/1.0 requests, which are obsolete and ill-suited to modern traffic volumes.
+- **`Robots`** — blocks search engine indexing (we'll cover this in detail in article 2).
+
+---
+
+## Route 1 — API secured by API keys
+
+```json
+"frontend": {
+  "domains": ["api.auxalentours.innovation.maif"],
+  "strip_path": true
+},
+"backend": {
+  "targets": [{ "hostname": "app-xxxxxxxx.innovation.maif" }],
+  "root": "/api/"
+}
+```
+
+Requests come in on `api.auxalentours.innovation.maif`. With `strip_path: true` and `root: /api/`, Otoroshi forwards to `/api/<path>` on the backend. The route does not filter by path — it covers the entire domain.
+
+The **`ApikeyCalls`** plugin is added with `mandatory: true` — any request without a valid key receives a `401`.
+
+### How API keys work in Otoroshi
+
+An API key consists of a **client ID** and a **client secret**. The client sends them via dedicated headers:
+
+```http
+Otoroshi-Client-Id: my-client-id
+Otoroshi-Client-Secret: my-client-secret
+```
+
+Or via the standard HTTP header:
+
+```http
+Authorization: Basic <base64(clientId:clientSecret)>
+```
+
+Quotas (requests per day, per month) can be configured, as well as IP or domain restrictions. The Aux Alentours par MAIF frontend has its own key to consume the API — as do partners, each with a dedicated key and adjusted limits. If a key is compromised, it can be revoked without impacting other clients.
+
+---
+
+## Route 2 — Public documentation
+
+```json
+"frontend": {
+  "domains": ["api.auxalentours.innovation.maif/doc"],
+  "strip_path": false
+},
+"backend": {
+  "targets": [{ "hostname": "app-xxxxxxxx.innovation.maif" }],
+  "root": "/"
+}
+```
+
+The documentation is exposed on the same domain as the API (`api.auxalentours.innovation.maif`), but on the `/doc` path. With `strip_path: false`, the path is forwarded as-is to the backend.
+
+No authentication plugin is added: the documentation is public. Otoroshi routes requests to `/doc` unconditionally, even though the main API route requires a key.
+
+---
+
+## Route 3 — Tile API
+
+```json
+"frontend": {
+  "domains": ["tiles.auxalentours.innovation.maif"],
+  "strip_path": true
+},
+"backend": {
+  "targets": [{ "hostname": "app-xxxxxxxx.innovation.maif" }],
+  "root": "/tiles/"
+}
+```
+
+Map tiles are exposed on a dedicated subdomain (`tiles.auxalentours.innovation.maif`). With `strip_path: true` and `root: /tiles/`, Otoroshi forwards to `/tiles/<z>/<x>/<y>.png` on the backend.
+
+Tiles are public — they are consumed directly by the browser, and a single map view can trigger dozens of parallel requests. Exposing tiles on a separate subdomain brings immediate architectural clarity and makes it easier to apply differentiated traffic policies — including caching, which we'll cover in article 3.
+
+---
+
+## Overview
+
+| Route | Frontend | Auth | Notes |
+|-------|----------|------|-------|
+| API | `api.auxalentours.innovation.maif` | API key | `ApikeyCalls` mandatory |
+| Documentation | `api.auxalentours.innovation.maif/doc` | None | Public access |
+| Tiles | `tiles.auxalentours.innovation.maif` | None | — |
+
+---
+
+## Key takeaways
+
+Otoroshi makes it possible to **decouple an application's exposure policy from its implementation**. A single application can be accessed in radically different ways depending on the context, with no code changes and no additional deployments.
+
+The granularity operates at two levels: the **domain** (dedicated subdomain for tiles) and the **path** (same domain, different path for documentation). In both cases, each route has its own plugin pipeline, completely independent from the others.
+
+In the next article, we stay with Aux Alentours par MAIF for two concrete HTTP use cases (CORS and robots.txt), before moving on to independent scenarios (HTTP redirects, iframe).

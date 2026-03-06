@@ -83,8 +83,8 @@ Les articles 4 est indépendant du fil rouge — il couvre des use-cases utiles 
 
 ## La série
 
-**Article 1 — Une app Clever Cloud, 4 expositions différentes**
-Une seule API déployée sur Clever Cloud (l'API d'Aux Alentours par MAIF), exposée sous 4 routes avec des profils radicalement différents : API sécurisées par API keys, documentation publique, API de tiles géographiques, API de rendu de cartes.
+**Article 1 — Une app Clever Cloud, trois expositions différentes**
+Une seule API déployée sur Clever Cloud (l'API d'Aux Alentours par MAIF), exposée sous trois routes avec des profils radicalement différents : API sécurisée par API keys, documentation publique et API de tiles géographiques.
 
 **Article 2 — HTTP au quotidien**
 Quatre cas qui peuvent être rencontrés : CORS pour les intégrations Leaflet/web, plugin robots.txt pour contrôler l'indexation, redirections HTTP pour une migration de domaine, suppression de headers de sécurité pour une iframe en développement.

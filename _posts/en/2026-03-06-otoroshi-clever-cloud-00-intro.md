@@ -83,8 +83,8 @@ Article 4 is independent from this running example — it covers use cases usefu
 
 ## The series
 
-**Article 1 — One Clever Cloud app, four different exposures**
-A single API deployed on Clever Cloud (the Aux Alentours par MAIF API), exposed through 4 routes with radically different profiles: API key-secured endpoints, public documentation, geographic tile API, and map rendering API.
+**Article 1 — One Clever Cloud app, three different exposures**
+A single API deployed on Clever Cloud (the Aux Alentours par MAIF API), exposed through three routes with radically different profiles: API key-secured endpoints, public documentation, and geographic tile API.
 
 **Article 2 — Everyday HTTP**
 Four situations that can come up on any project: CORS for Leaflet/web integrations, the robots.txt plugin to control indexing, HTTP redirects for a domain migration, and removing security headers to embed an iframe in development.
