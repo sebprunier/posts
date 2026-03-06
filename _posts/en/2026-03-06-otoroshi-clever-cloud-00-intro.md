@@ -83,7 +83,7 @@ Article 4 is independent from this running example — it covers use cases usefu
 
 ## The series
 
-**Article 1 — One Clever Cloud app, three different exposures**
+**[Article 1 — One Clever Cloud app, three different exposures]({{ "/2026/03/06/otoroshi-clever-cloud-01-one-app-three-routes/" | relative_url }})**
 A single API deployed on Clever Cloud (the Aux Alentours par MAIF API), exposed through three routes with radically different profiles: API key-secured endpoints, public documentation, and geographic tile API.
 
 **Article 2 — Everyday HTTP**

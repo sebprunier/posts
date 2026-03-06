@@ -89,18 +89,13 @@ Le plugin **`ApikeyCalls`** est ajouté avec `mandatory: true` — toute requêt
 
 ### Comment fonctionnent les API keys dans Otoroshi
 
-Une API key est composée d'un **client ID** et d'un **client secret**. Le client les envoie via des headers dédiés :
+Une API key est composée d'un **client ID** et d'un **client secret**. Otoroshi supporte plusieurs façons de les transmettre ; on utilise ici le **bearer token**, via l'header HTTP standard :
 
 ```http
-Otoroshi-Client-Id: mon-client-id
-Otoroshi-Client-Secret: mon-client-secret
+Authorization: Bearer otoapk_<api-key-id>_<hash>
 ```
 
-Ou via l'header HTTP standard :
-
-```http
-Authorization: Basic <base64(clientId:clientSecret)>
-```
+Le token est un token dédié généré par Otoroshi, utilisé directement dans les requêtes. C'est l'extracteur `oto_bearer` du plugin `ApikeyCalls` qui le valide côté Otoroshi.
 
 On peut configurer des quotas (requêtes par jour, par mois) et restreindre par IP ou domaine. Le site Aux Alentours par MAIF dispose de sa propre clé pour consommer l'API — tout comme les partenaires qui ont chacun leur clé dédiée avec des limites ajustées. Si une clé est compromise, on la révoque sans impacter les autres clients.
 

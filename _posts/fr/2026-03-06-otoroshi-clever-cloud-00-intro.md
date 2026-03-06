@@ -83,7 +83,7 @@ Les articles 4 est indépendant du fil rouge — il couvre des use-cases utiles 
 
 ## La série
 
-**Article 1 — Une app Clever Cloud, trois expositions différentes**
+**[Article 1 — Une app Clever Cloud, trois expositions différentes]({{ "/2026/03/06/otoroshi-clever-cloud-01-one-app-three-routes/" | relative_url }})**
 Une seule API déployée sur Clever Cloud (l'API d'Aux Alentours par MAIF), exposée sous trois routes avec des profils radicalement différents : API sécurisée par API keys, documentation publique et API de tiles géographiques.
 
 **Article 2 — HTTP au quotidien**
