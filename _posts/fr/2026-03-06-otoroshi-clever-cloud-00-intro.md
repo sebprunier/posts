@@ -92,5 +92,5 @@ Quatre cas qui peuvent être rencontrés : CORS pour les intégrations Leaflet/w
 **Article 3 — Sécurité & performance**
 Sécuriser les environnements hors production sans toucher au code (Basic Auth), authentifier les utilisateurs via OpenID Connect (sociétaires MAIF sur Aux Alentours), et mettre en cache les réponses d'une API de tiles pour soulager le backend.
 
-**Article 4 — Fonctionnalités avancées**
+**Article 4 — Funny Features**
 Servir des contenus sans application dédiée (ZIP, S3, assets statiques), et exposer une UI Swagger complète à partir d'un simple fichier `openapi.json`.

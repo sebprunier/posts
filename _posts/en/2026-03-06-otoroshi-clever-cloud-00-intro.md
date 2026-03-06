@@ -92,5 +92,5 @@ Four situations that can come up on any project: CORS for Leaflet/web integratio
 **Article 3 — Security & performance**
 Securing non-production environments without touching the code (Basic Auth), authenticating users via OpenID Connect (MAIF members on Aux Alentours par MAIF), and caching tile API responses to offload the backend.
 
-**Article 4 — Advanced features**
+**Article 4 — Funny Features**
 Serving content without a dedicated application (ZIP, S3, static assets), and exposing a full Swagger UI from a simple `openapi.json` file.

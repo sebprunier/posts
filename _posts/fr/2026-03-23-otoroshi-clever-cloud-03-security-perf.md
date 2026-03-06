@@ -219,4 +219,4 @@ Ces trois cas ont un point commun : **des besoins transverses résolus une fois 
 - OIDC : le flux d'authentification complet est géré par Otoroshi — l'app reçoit juste les infos utilisateur dans un header
 - Cache : une tuile générée une fois n'est plus générée pour les requêtes suivantes — sans aucune logique de cache dans le backend
 
-Dans le prochain et dernier article : servir des contenus sans application dédiée (ZIP, S3, assets statiques) et exposer une UI Swagger depuis un simple fichier `openapi.json`.
+Dans le prochain et dernier article (*Funny Features*) : servir des contenus sans application dédiée (ZIP, S3, assets statiques) et exposer une UI Swagger depuis un simple fichier `openapi.json`.

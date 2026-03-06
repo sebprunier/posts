@@ -219,4 +219,4 @@ These three cases share a common trait: **cross-cutting concerns resolved once i
 - OIDC: the complete authentication flow is handled by Otoroshi — the app just receives user info in a header
 - Cache: a tile generated once is not generated again for subsequent requests — with no caching logic in the backend
 
-Next and final article: serving content without a dedicated application (ZIP, S3, static assets) and exposing a Swagger UI from a simple `openapi.json` file.
+Next and final article (*Funny Features*): serving content without a dedicated application (ZIP, S3, static assets) and exposing a Swagger UI from a simple `openapi.json` file.
