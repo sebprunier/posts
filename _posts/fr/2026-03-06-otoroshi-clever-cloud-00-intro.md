@@ -86,7 +86,7 @@ Les articles 4 est indépendant du fil rouge — il couvre des use-cases utiles 
 **[Article 1 — Une app Clever Cloud, trois expositions différentes]({{ "/2026/03/06/otoroshi-clever-cloud-01-one-app-three-routes/" | relative_url }})**
 Une seule API déployée sur Clever Cloud (l'API d'Aux Alentours par MAIF), exposée sous trois routes avec des profils radicalement différents : API sécurisée par API keys, documentation publique et API de tiles géographiques.
 
-**Article 2 — HTTP au quotidien**
+**[Article 2 — HTTP au quotidien]({{ "/2026/03/16/otoroshi-clever-cloud-02-http-daily/" | relative_url }})**
 Quatre cas qui peuvent être rencontrés : CORS pour les intégrations Leaflet/web, plugin robots.txt pour contrôler l'indexation, redirections HTTP pour une migration de domaine, suppression de headers de sécurité pour une iframe en développement.
 
 **Article 3 — Sécurité & performance**

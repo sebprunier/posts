@@ -86,7 +86,7 @@ Article 4 is independent from this running example — it covers use cases usefu
 **[Article 1 — One Clever Cloud app, three different exposures]({{ "/2026/03/06/otoroshi-clever-cloud-01-one-app-three-routes/" | relative_url }})**
 A single API deployed on Clever Cloud (the Aux Alentours par MAIF API), exposed through three routes with radically different profiles: API key-secured endpoints, public documentation, and geographic tile API.
 
-**Article 2 — Everyday HTTP**
+**[Article 2 — Everyday HTTP]({{ "/2026/03/16/otoroshi-clever-cloud-02-http-daily/" | relative_url }})**
 Four situations that can come up on any project: CORS for Leaflet/web integrations, the robots.txt plugin to control indexing, HTTP redirects for a domain migration, and removing security headers to embed an iframe in development.
 
 **Article 3 — Security & performance**
