@@ -6,6 +6,7 @@ date: 2026-03-30
 lang: en
 categories: [otoroshi, clever-cloud]
 tags: [otoroshi, clever-cloud, backendless, swagger, static, s3]
+cover: /assets/images/2026-03-30-otoroshi-clever-cloud-04-funny-features/cover.png
 ---
 
 {% include lang-switcher.html %}
