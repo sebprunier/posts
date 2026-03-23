@@ -6,6 +6,7 @@ date: 2026-03-23
 lang: en
 categories: [otoroshi, clever-cloud]
 tags: [otoroshi, clever-cloud, basic-auth, openid-connect, oidc, cache, security]
+cover: /assets/images/2026-03-23-otoroshi-clever-cloud-03-security-perf/cover.png
 ---
 
 {% include lang-switcher.html %}

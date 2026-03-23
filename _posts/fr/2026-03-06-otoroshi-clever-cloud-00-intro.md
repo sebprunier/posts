@@ -15,6 +15,8 @@ cover: /assets/images/2026-03-06-otoroshi-clever-cloud-00-intro/cover.png
 
 Cette série d'articles explore 9 cas d'usage concrets d'Otoroshi déployé devant des applications hébergées sur Clever Cloud. Pas de théorie abstraite : des situations réelles, des configurations qui fonctionnent.
 
+{% include cover-image.html %}
+
 ---
 
 ## Otoroshi — un reverse proxy HTTP pour la prod

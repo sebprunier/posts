@@ -13,6 +13,8 @@ cover: /assets/images/2026-03-06-otoroshi-clever-cloud-01-one-app-three-routes/c
 
 Premier article de la [série Otoroshi + Clever Cloud]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }}). On commence par le cas fondateur : une seule application backend, exposée de trois façons différentes — sans toucher au code.
 
+{% include cover-image.html %}
+
 ---
 
 ## Aux Alentours par MAIF — le contexte

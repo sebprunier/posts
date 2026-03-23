@@ -13,6 +13,8 @@ cover: /assets/images/2026-03-16-otoroshi-clever-cloud-02-http-daily/cover.png
 
 Deuxième article de la [série Otoroshi + Clever Cloud]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }}). Quatre cas HTTP du quotidien — des situations concrètes que tout projet peut rencontrer, résolues en quelques clics dans Otoroshi sans modifier le code des applications.
 
+{% include cover-image.html %}
+
 ---
 
 ## CORS — intégrer les tiles dans du code JS tiers
