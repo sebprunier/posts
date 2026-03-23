@@ -1,3 +1,10 @@
+{% if page.cover %}
+  {% assign cover_url = page.cover | prepend: site.baseurl | prepend: site.url %}
+  <meta property="og:image" content="{{ cover_url }}" />
+  <meta name="twitter:image" content="{{ cover_url }}" />
+  <meta name="twitter:card" content="summary_large_image" />
+{% endif %}
+
 <script type="module">
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true, theme: 'neutral' });

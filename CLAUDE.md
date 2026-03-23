@@ -34,6 +34,7 @@ _layouts/
   home.html                  ← MM override: filters posts by language
 
 _includes/
+  cover-image.html           ← optional cover image (OG + display in article)
   lang-switcher.html         ← inline FR/EN switcher (inside articles)
   masthead.html              ← MM override: adds lang switcher + mobile hamburger
   footer.html                ← MM override: social links + bilingual copyright
@@ -65,12 +66,21 @@ date: YYYY-MM-DD
 lang: fr          # or 'en'
 categories: [cat]
 tags: [tag1, tag2]
+cover: /assets/images/YYYY-MM-DD-slug/cover.png  # optional — OG image + display
+cover_alt: "Image description"                     # optional — alt text (defaults to title)
+cover_caption: "Credit: ..."                       # optional — caption below the image
 ---
 
 {% include lang-switcher.html %}
+
+Introduction text...
+
+{% include cover-image.html %}
 ```
 
-3. Both files must share **the same slug and date** for the language switcher to work correctly.
+3. **Cover image** (optional): when `cover` is set, Open Graph / Twitter Card meta tags are generated automatically. Use `{% include cover-image.html %}` in the article body to display the image where you want it.
+
+4. Both files must share **the same slug and date** for the language switcher to work correctly.
 
 4. Commit and push → GitHub Actions rebuilds and deploys automatically.
 

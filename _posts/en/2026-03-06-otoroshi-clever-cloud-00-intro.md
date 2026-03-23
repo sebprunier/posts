@@ -6,6 +6,7 @@ date: 2026-03-06
 lang: en
 categories: [otoroshi, clever-cloud]
 tags: [otoroshi, clever-cloud, api-gateway, api-management]
+cover: /assets/images/2026-03-06-otoroshi-clever-cloud-00-intro/cover.png
 ---
 
 {% include lang-switcher.html %}

@@ -6,6 +6,7 @@ date: 2026-03-06
 lang: fr
 categories: [otoroshi, clever-cloud]
 tags: [otoroshi, clever-cloud, api-gateway, api-management, api-keys, routing]
+cover: /assets/images/2026-03-06-otoroshi-clever-cloud-01-one-app-three-routes/cover.png
 ---
 
 {% include lang-switcher.html %}

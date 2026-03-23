@@ -6,6 +6,7 @@ date: 2026-03-16
 lang: fr
 categories: [otoroshi, clever-cloud]
 tags: [otoroshi, clever-cloud, cors, robots, redirect, iframe, http]
+cover: /assets/images/2026-03-16-otoroshi-clever-cloud-02-http-daily/cover.png
 ---
 
 {% include lang-switcher.html %}

@@ -1,0 +1,8 @@
+{% if page.cover %}
+<figure class="cover-image">
+  <img src="{{ page.cover | relative_url }}" alt="{{ page.cover_alt | default: page.title }}" />
+  {% if page.cover_caption %}
+    <figcaption>{{ page.cover_caption }}</figcaption>
+  {% endif %}
+</figure>
+{% endif %}
