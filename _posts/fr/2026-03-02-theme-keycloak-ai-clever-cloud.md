@@ -6,11 +6,14 @@ date: 2026-03-02
 lang: fr
 categories: [keycloak, ia]
 tags: [keycloak, claude-code, freemarker, clever-cloud, spring-boot]
+cover: /assets/images/2026-02-27-theme-keycloak-ia/cover.jpg
 ---
 
 {% include lang-switcher.html %}
 
 Cet article raconte comment j'ai créé et déployé sur Clever Cloud un thème Keycloak personnalisé pour le backoffice du DICRIM numérique, en utilisant Claude Code comme assistant. De la première question aux derniers bugs en prod, je vous raconte tout — y compris les erreurs.
+
+{% include cover-image.html %}
 
 ---
 
