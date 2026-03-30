@@ -130,7 +130,15 @@ Sur Clever Cloud, chaque application déployée a un coût en ressources et en m
 
 ## Bilan de la série
 
-Neuf use cases, une instance Otoroshi, des dizaines d'applications servies. Ce qui ressort de cette série :
+Neuf use cases, une instance Otoroshi, des dizaines d'applications servies. Retrouvez tous les articles de la série :
+
+1. [Introduction]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }})
+2. [#1 : une app, trois expositions]({{ "/2026/03/06/otoroshi-clever-cloud-01-one-app-three-routes/" | relative_url }})
+3. [#2 : HTTP au quotidien]({{ "/2026/03/16/otoroshi-clever-cloud-02-http-daily/" | relative_url }})
+4. [#3 : sécurité & performance]({{ "/2026/03/23/otoroshi-clever-cloud-03-security-perf/" | relative_url }})
+5. [#4 : Funny Features]({{ "/2026/03/30/otoroshi-clever-cloud-04-funny-features/" | relative_url }}) *(cet article)*
+
+Ce qui ressort de cette série :
 
 **Otoroshi comme couche de contrôle** — routing, sécurité, transformation HTTP, cache, authentification : tout se configure en un seul endroit, sans modifier le code des applications.
 

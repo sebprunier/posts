@@ -128,7 +128,15 @@ On Clever Cloud, every deployed application has a cost in resources and maintena
 
 ## Series wrap-up
 
-Nine use cases, one Otoroshi instance, dozens of applications served. Key takeaways from this series:
+Nine use cases, one Otoroshi instance, dozens of applications served. Find all the articles in the series:
+
+1. [Introduction]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }})
+2. [#1: one app, three exposures]({{ "/2026/03/06/otoroshi-clever-cloud-01-one-app-three-routes/" | relative_url }})
+3. [#2: everyday HTTP]({{ "/2026/03/16/otoroshi-clever-cloud-02-http-daily/" | relative_url }})
+4. [#3: security & performance]({{ "/2026/03/23/otoroshi-clever-cloud-03-security-perf/" | relative_url }})
+5. [#4: Funny Features]({{ "/2026/03/30/otoroshi-clever-cloud-04-funny-features/" | relative_url }}) *(this article)*
+
+Key takeaways from this series:
 
 **Otoroshi as a control layer** — routing, security, HTTP transformation, caching, authentication: everything is configured in one place, without modifying application code.
 
