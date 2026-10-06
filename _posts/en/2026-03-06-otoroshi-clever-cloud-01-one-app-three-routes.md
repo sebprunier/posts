@@ -4,13 +4,10 @@ title: "Last Night Otoroshi Saved My Life — #1: one app, three exposures"
 excerpt: "The Aux Alentours par MAIF API deployed on Clever Cloud, exposed through three radically different Otoroshi routes: API key-secured endpoint, public documentation, and tile API."
 date: 2026-03-06
 lang: en
-categories: [otoroshi, clever-cloud]
 tags: [api, cloud, security, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-06-otoroshi-clever-cloud-01-one-app-three-routes/cover.png
 ---
-
-{% include lang-switcher.html %}
 
 First article in the [Otoroshi + Clever Cloud series]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }}). We start with the foundational use case: a single backend application, exposed three different ways — without touching the code.
 

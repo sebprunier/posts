@@ -4,13 +4,10 @@ title: "Last Night Otoroshi Saved My Life — #4 : Funny Features"
 excerpt: "Servir des contenus statiques sans application dédiée (ZIP, S3, assets HTTP), et exposer une UI Swagger complète depuis un simple fichier openapi.json — le tout sans déployer de serveur supplémentaire."
 date: 2026-03-30
 lang: fr
-categories: [otoroshi, clever-cloud]
 tags: [api, web, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-30-otoroshi-clever-cloud-04-funny-features/cover.png
 ---
-
-{% include lang-switcher.html %}
 
 Quatrième et dernier article de la [série Otoroshi + Clever Cloud]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }}). On sort du fil rouge Aux Alentours par MAIF pour explorer deux *funny features* d'Otoroshi qui permettent de servir des contenus sans déployer d'application backend dédiée.
 

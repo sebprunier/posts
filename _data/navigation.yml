@@ -3,3 +3,5 @@ main:
     url: /
   - title: "Tags"
     url: /tags/
+  - title: "À propos"
+    url: /about/

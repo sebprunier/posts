@@ -208,10 +208,10 @@ ins {
   color: var(--text);
 }
 
-// Mermaid diagrams use a light palette: keep them on a light card in both modes
+// Mermaid diagrams (rendered with the 'neutral' or 'dark' theme, see head/custom.html)
 pre.mermaid {
   padding: 1em;
-  background: #ffffff;
+  background: transparent;
   border: 1px solid var(--border);
   border-radius: 12px;
 }
@@ -244,6 +244,33 @@ pre.mermaid {
   .tl-bar-label { font-size: 11.5px; font-weight: 600; fill: var(--text); }
   .tl-row { fill: var(--text); }
   .tl-row--strong { font-weight: 600; }
+}
+
+// Inline SVG icons (see _includes/icon.html)
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
+.icon--stroke {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.page__meta .icon {
+  margin-right: 0.25em;
+}
+
+// Heading permalinks added by the theme script: "#" instead of the Font Awesome link icon
+.header-link i::before {
+  content: "#";
+  font-style: normal;
 }
 
 /* ==========================================================================
@@ -774,37 +801,6 @@ li.masthead__lang-switcher {
   }
 }
 
-.lang-switcher {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5em;
-  margin-bottom: 1.5em;
-  padding: 0.2em 0.8em;
-  font-size: 0.72em;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  border: 1px solid var(--border);
-  border-radius: 999px;
-
-  &__current {
-    color: var(--text);
-  }
-
-  &__link {
-    color: var(--muted);
-    text-decoration: none;
-    transition: color 0.2s ease;
-
-    &:visited {
-      color: var(--muted);
-    }
-
-    &:hover {
-      color: var(--accent);
-    }
-  }
-}
-
 // Article footer: tags as chips
 .page__inner-wrap > .page__meta {
   margin-top: 3em;
@@ -891,6 +887,42 @@ li.masthead__lang-switcher {
       font-weight: 600;
       color: var(--accent);
     }
+  }
+}
+
+/* ==========================================================================
+   About page
+   ========================================================================== */
+
+.about-card {
+  display: flex;
+  gap: 1.2em;
+  align-items: center;
+  margin-bottom: 2em;
+  padding: 1.2em 1.4em;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+
+  &__avatar {
+    flex: 0 0 auto;
+    width: 88px;
+    height: 88px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 5px var(--accent);
+  }
+
+  & &__name { // beats the theme's .page__content p margins
+    margin: 0;
+    font-size: 1.2em;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+  }
+
+  & &__role {
+    margin: 0.2em 0 0;
+    font-size: 0.88em;
+    color: var(--muted);
   }
 }
 
@@ -1044,12 +1076,16 @@ li.masthead__lang-switcher {
     list-style: none;
 
     li a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35em;
       font-size: 0.95em;
       transition: color 0.2s ease;
+    }
 
-      i {
-        color: inherit !important;
-      }
+    .icon {
+      width: 1.1em;
+      height: 1.1em;
     }
   }
 

@@ -2,26 +2,26 @@
   <ul class="social-icons">
     <li>
       <a href="https://www.linkedin.com/in/sebastien-prunier/" title="LinkedIn" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-fw fa-linkedin" aria-hidden="true"></i>
+        {% include icon.html name="linkedin" %}
         <span class="sr-only">LinkedIn</span>
       </a>
     </li>
     <li>
       <a href="https://x.com/sebprunier" title="X (Twitter)" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-fw fa-x-twitter" aria-hidden="true"></i>
+        {% include icon.html name="x" %}
         <span class="sr-only">X</span>
       </a>
     </li>
     <li>
       <a href="https://github.com/sebprunier" title="GitHub" target="_blank" rel="noopener noreferrer">
-        <i class="fab fa-fw fa-github" aria-hidden="true"></i>
+        {% include icon.html name="github" %}
         <span class="sr-only">GitHub</span>
       </a>
     </li>
     {% unless site.atom_feed.hide %}
       <li>
         <a href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}">
-          <i class="fas fa-fw fa-rss-square" aria-hidden="true"></i> RSS
+          {% include icon.html name="rss" %} RSS
         </a>
       </li>
     {% endunless %}

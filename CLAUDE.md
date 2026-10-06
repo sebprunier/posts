@@ -24,6 +24,8 @@ _posts/
 _pages/
   tags.md                    ← FR tags page
   tags-en.md                 ← EN tags page
+  about.md                   ← FR about page (/about/)
+  about-en.md                ← EN about page (/en/about/)
   index-en.md                ← EN home page
 
 _data/
@@ -38,11 +40,12 @@ _includes/
   post_pagination.html       ← series navigation box (replaces the theme's prev/next links)
   figures/                   ← inline SVG charts, styled with the theme tokens (follow dark mode)
   cover-image.html           ← optional cover image (OG + display in article)
-  lang-switcher.html         ← inline FR/EN switcher (inside articles)
+  icon.html                  ← inline SVG icons (calendar, clock, linkedin, x, github, rss) — no Font Awesome
+  head.html                  ← MM override: the theme's head without the Font Awesome stylesheet
   masthead.html              ← MM override: accent on "/blog", lang switcher, dark mode toggle, mobile hamburger
   footer.html                ← MM override: social links + bilingual copyright
   footer/custom.html         ← intentionally empty (prevents double rendering)
-  head/custom.html           ← OG image, font preload, theme init (no flash), code block copy button, mermaid
+  head/custom.html           ← OG image, font preload, theme init (no flash), code block copy button, mermaid (loaded only when a page has a diagram)
   page__meta.html            ← MM override: uses page.locale
   page__date.html            ← MM override: uses page.locale + custom_date.html
   custom_date.html           ← Liquid-based date formatting (FR/EN)
@@ -50,7 +53,7 @@ _includes/
 assets/
   css/main.scss              ← all custom styles (tokens, dark mode, masthead, home, articles, tags page, footer)
   fonts/                     ← self-hosted Inter + JetBrains Mono (woff2, latin + latin-ext)
-  images/                    ← article images (one subfolder per article)
+  images/                    ← article images (one subfolder per article), about/avatar.jpg
 ```
 
 ## Adding an article
@@ -68,15 +71,12 @@ title: "Article title"
 excerpt: "Summary displayed on the home page card."
 date: YYYY-MM-DD
 lang: fr          # or 'en'
-categories: [cat]
 tags: [api, cloud]  # pick from the tag list below
 series: "Series name"  # optional — same value on every post of the series
 cover: /assets/images/YYYY-MM-DD-slug/cover.png  # optional — OG image + card + display
 cover_alt: "Image description"                     # optional — alt text (defaults to title)
 cover_caption: "Credit: ..."                       # optional — caption below the image
 ---
-
-{% include lang-switcher.html %}
 
 Introduction text...
 
@@ -85,7 +85,7 @@ Introduction text...
 
 3. **Cover image** (optional): 1200×630 (Open Graph ratio). When `cover` is set, Open Graph / Twitter Card meta tags are generated automatically and the home card shows it (otherwise a gradient fallback). Use `{% include cover-image.html %}` in the article body to display it.
 
-4. Both files must share **the same slug and date** for the language switcher to work correctly.
+4. Both files must share **the same slug and date** for the language switcher (in the masthead) to work correctly.
 
 5. Commit and push → GitHub Actions rebuilds and deploys automatically.
 
@@ -122,6 +122,10 @@ Posts sharing the same `series:` value get a navigation box at the end of the ar
 ```
 
 - Charts that must follow dark mode: inline SVG in `_includes/figures/`, using CSS classes styled with the `--text`, `--muted`, `--border`, `--accent` tokens (see `.figure-chart` in `main.scss`), then `{% include figures/<name>.html %}`. An SVG loaded through `<img>` cannot follow the page theme.
+
+## Diagrams
+
+Mermaid diagrams go in a raw `<pre class="mermaid">…</pre>` block. The library is only loaded on pages that contain one, and diagrams are re-rendered with the `dark` / `neutral` theme when the color mode changes.
 
 ## Styling and dark mode
 

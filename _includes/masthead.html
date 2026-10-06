@@ -69,6 +69,7 @@
     var next = current === 'dark' ? 'light' : 'dark';
     root.setAttribute('data-theme', next);
     try { localStorage.setItem('theme', next); } catch (e) {}
+    document.dispatchEvent(new CustomEvent('themechange', { detail: next }));
   });
 </script>
 <script>

@@ -4,13 +4,10 @@ title: "Last Night Otoroshi Saved My Life — #2: everyday HTTP"
 excerpt: "CORS for integrating tiles in third-party JS code, robots.txt without touching the app, HTTP redirects with path param capture, removing security headers to embed an iframe in dev."
 date: 2026-03-16
 lang: en
-categories: [otoroshi, clever-cloud]
 tags: [api, web, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-16-otoroshi-clever-cloud-02-http-daily/cover.png
 ---
-
-{% include lang-switcher.html %}
 
 Second article in the [Otoroshi + Clever Cloud series]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }}). Four everyday HTTP cases — concrete situations any project can encounter, solved in a few clicks in Otoroshi without modifying application code.
 

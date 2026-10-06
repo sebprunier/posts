@@ -4,13 +4,10 @@ title: "Créer un blog technique avec Jekyll et GitHub Pages"
 excerpt: "J'avais envie d'un endroit simple pour publier des retours d'expérience tech, sans infrastructure à gérer. GitHub Pages + Jekyll s'est imposé naturellement."
 date: 2026-02-27
 lang: fr
-categories: [blog, jekyll]
 tags: [web, devops]
 cover: /assets/images/2026-02-27-blog-github-pages/cover.jpg
 cover_alt: "Illustration : des feuilles Markdown passent dans une presse d'imprimerie et ressortent en pages web, publiées automatiquement"
 ---
-
-{% include lang-switcher.html %}
 
 J'avais envie d'un endroit simple pour publier des retours d'expérience tech, sans infrastructure à gérer. [GitHub Pages](https://docs.github.com/fr/pages) + [Jekyll](https://jekyllrb.com/) s'est imposé naturellement : gratuit, versionné, déployé automatiquement à chaque push.
 

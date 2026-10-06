@@ -4,13 +4,10 @@ title: "Last Night Otoroshi Saved My Life — #3 : sécurité & performance"
 excerpt: "Basic Auth pour protéger les environnements hors production, OpenID Connect pour authentifier les sociétaires MAIF sur certaines fonctionnalités d'Aux Alentours, et cache HTTP pour soulager l'API de tiles."
 date: 2026-03-23
 lang: fr
-categories: [otoroshi, clever-cloud]
 tags: [api, sécurité, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-23-otoroshi-clever-cloud-03-security-perf/cover.png
 ---
-
-{% include lang-switcher.html %}
 
 Troisième article de la [série Otoroshi + Clever Cloud]({{ "/2026/03/06/otoroshi-clever-cloud-00-intro/" | relative_url }}). Deux cas de sécurité et un cas de performance — tous résolus au niveau d'Otoroshi, sans modifier les applications.
 

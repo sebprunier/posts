@@ -17,8 +17,24 @@
 {% endif %}
 
 <script type="module">
-  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
-  mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
+  // Mermaid is only loaded on pages that contain a diagram, and follows the light/dark theme
+  const diagrams = document.querySelectorAll('pre.mermaid');
+  if (diagrams.length) {
+    const { default: mermaid } = await import('https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs');
+    diagrams.forEach((el) => { el.dataset.source = el.innerHTML; }); // innerHTML keeps <br/> in labels
+    const isDark = () => {
+      const t = document.documentElement.getAttribute('data-theme');
+      return t ? t === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    };
+    const render = async () => {
+      diagrams.forEach((el) => { el.removeAttribute('data-processed'); el.innerHTML = el.dataset.source; });
+      mermaid.initialize({ startOnLoad: false, theme: isDark() ? 'dark' : 'neutral' });
+      await mermaid.run({ nodes: diagrams });
+    };
+    await render();
+    document.addEventListener('themechange', render);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', render);
+  }
 </script>
 
 <script>

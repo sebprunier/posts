@@ -4,13 +4,10 @@ title: "Last Night Otoroshi Saved My Life — Introduction"
 excerpt: "Otoroshi is an open source HTTP reverse proxy packed with plugins. Clever Cloud is a European PaaS. Together, they make a remarkably effective duo for managing APIs in production. An introduction."
 date: 2026-03-06
 lang: en
-categories: [otoroshi, clever-cloud]
 tags: [api, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-06-otoroshi-clever-cloud-00-intro/cover.png
 ---
-
-{% include lang-switcher.html %}
 
 *Last Night a DJ Saved My Life* — Indeep, 1982. Otoroshi is the DJ: it quietly slots in between the outside world and your applications, and it's often the one that fixes problems before they ever reach your code.
 
