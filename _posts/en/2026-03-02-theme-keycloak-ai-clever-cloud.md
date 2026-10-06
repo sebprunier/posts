@@ -6,6 +6,8 @@ date: 2026-03-02
 lang: en
 tags: [ai, security, web, cloud, clever-cloud, claude]
 cover: /assets/images/2026-02-27-theme-keycloak-ia/cover.jpg
+cover_width: 1536
+cover_height: 1024
 ---
 
 This article covers how I created and deployed a custom Keycloak theme on Clever Cloud for the DICRIM numérique backoffice, using Claude Code as an assistant. From the first question to the last production bugs, I'll walk you through everything — including the mistakes.

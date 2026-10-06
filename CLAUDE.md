@@ -78,6 +78,8 @@ series: "Series name"  # optional — same value on every post of the series
 cover: /assets/images/YYYY-MM-DD-slug/cover.png  # optional — OG image + card + display
 cover_alt: "Image description"                     # optional — alt text (defaults to title)
 cover_caption: "Credit: ..."                       # optional — caption below the image
+cover_width: 1536                                  # optional — only if the cover is not 1200×630 (og:image:width)
+cover_height: 1024                                 # optional — same, og:image:height
 ---
 
 Introduction text...
