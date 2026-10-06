@@ -115,3 +115,18 @@ li.masthead__lang-switcher {
     font-style: italic;
   }
 }
+
+// Desktop: smaller body text (theme goes up to 22px on wide screens)
+@media (min-width: 1024px) {
+  html { font-size: 18px; }
+}
+
+// No author sidebar nor TOC: centered reading column
+.layout--single .page {
+  float: none;
+  width: 100%;
+  max-width: 820px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: 0;
+}
