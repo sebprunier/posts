@@ -61,6 +61,7 @@ include:
 
 exclude:
   - README.md
+  - CLAUDE.md
   - Gemfile
   - Gemfile.lock
   - .gitignore
