@@ -5,7 +5,7 @@ excerpt: "Cet article raconte comment j'ai créé et déployé sur Clever Cloud 
 date: 2026-03-02
 lang: fr
 categories: [keycloak, ia]
-tags: [keycloak, claude-code, freemarker, clever-cloud, spring-boot]
+tags: [ia, sécurité, web, cloud, clever-cloud, claude]
 cover: /assets/images/2026-02-27-theme-keycloak-ia/cover.jpg
 ---
 

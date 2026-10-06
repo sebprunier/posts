@@ -5,7 +5,7 @@ excerpt: "Basic Auth to protect non-production environments, OpenID Connect to a
 date: 2026-03-23
 lang: en
 categories: [otoroshi, clever-cloud]
-tags: [otoroshi, clever-cloud, basic-auth, openid-connect, oidc, cache, security]
+tags: [api, security, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-23-otoroshi-clever-cloud-03-security-perf/cover.png
 ---

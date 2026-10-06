@@ -5,7 +5,7 @@ excerpt: "Otoroshi is an open source HTTP reverse proxy packed with plugins. Cle
 date: 2026-03-06
 lang: en
 categories: [otoroshi, clever-cloud]
-tags: [otoroshi, clever-cloud, api-gateway, api-management]
+tags: [api, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-06-otoroshi-clever-cloud-00-intro/cover.png
 ---

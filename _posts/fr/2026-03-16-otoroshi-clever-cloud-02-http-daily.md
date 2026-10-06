@@ -5,7 +5,7 @@ excerpt: "CORS pour l'intégration de tiles dans du code JS, robots.txt sans tou
 date: 2026-03-16
 lang: fr
 categories: [otoroshi, clever-cloud]
-tags: [otoroshi, clever-cloud, cors, robots, redirect, iframe, http]
+tags: [api, web, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-16-otoroshi-clever-cloud-02-http-daily/cover.png
 ---

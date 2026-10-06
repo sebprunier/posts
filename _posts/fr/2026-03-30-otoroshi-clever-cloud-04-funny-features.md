@@ -5,7 +5,7 @@ excerpt: "Servir des contenus statiques sans application dédiée (ZIP, S3, asse
 date: 2026-03-30
 lang: fr
 categories: [otoroshi, clever-cloud]
-tags: [otoroshi, clever-cloud, backendless, swagger, static, s3]
+tags: [api, web, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-30-otoroshi-clever-cloud-04-funny-features/cover.png
 ---

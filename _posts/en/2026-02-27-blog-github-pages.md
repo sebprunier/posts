@@ -5,7 +5,7 @@ excerpt: "I wanted a simple place to publish technical experience reports withou
 date: 2026-02-27
 lang: en
 categories: [blog, jekyll]
-tags: [jekyll, github-pages, minimal-mistakes, jekyll-polyglot, github-actions]
+tags: [web, devops]
 ---
 
 {% include lang-switcher.html %}

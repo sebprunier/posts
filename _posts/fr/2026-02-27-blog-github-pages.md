@@ -5,7 +5,7 @@ excerpt: "J'avais envie d'un endroit simple pour publier des retours d'expérien
 date: 2026-02-27
 lang: fr
 categories: [blog, jekyll]
-tags: [jekyll, github-pages, minimal-mistakes, jekyll-polyglot, github-actions]
+tags: [web, devops]
 ---
 
 {% include lang-switcher.html %}

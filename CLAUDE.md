@@ -6,7 +6,7 @@ URL: `https://sebprunier.github.io/posts/`
 
 ## Stack
 
-- **Theme**: [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) (`mmistakes/minimal-mistakes`), skin `air`, via `jekyll-remote-theme`
+- **Theme**: [Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/) (`mmistakes/minimal-mistakes`), skin `air`, via `jekyll-remote-theme` — heavily restyled in `assets/css/main.scss` (own colors, fonts, dark mode, card-based home)
 - **Multilingual**: [jekyll-polyglot](https://polyglot.untra.io/) — FR (default) + EN
 - **Deployment**: GitHub Actions (`.github/workflows/jekyll.yml`) — required because jekyll-polyglot is not on the GitHub Pages plugin whitelist
 
@@ -31,21 +31,25 @@ _data/
   en/navigation.yml          ← EN navigation (polyglot override)
 
 _layouts/
-  home.html                  ← MM override: filters posts by language
+  home.html                  ← custom home: hero (FR/EN tagline) + grid of post cards, filtered by language
 
 _includes/
+  post-card.html             ← home card (cover or gradient fallback, date, read time, excerpt, 3 first tags)
+  post_pagination.html       ← series navigation box (replaces the theme's prev/next links)
+  figures/                   ← inline SVG charts, styled with the theme tokens (follow dark mode)
   cover-image.html           ← optional cover image (OG + display in article)
   lang-switcher.html         ← inline FR/EN switcher (inside articles)
-  masthead.html              ← MM override: adds lang switcher + mobile hamburger
+  masthead.html              ← MM override: accent on "/blog", lang switcher, dark mode toggle, mobile hamburger
   footer.html                ← MM override: social links + bilingual copyright
   footer/custom.html         ← intentionally empty (prevents double rendering)
+  head/custom.html           ← OG image, font preload, theme init (no flash), code block copy button, mermaid
   page__meta.html            ← MM override: uses page.locale
   page__date.html            ← MM override: uses page.locale + custom_date.html
   custom_date.html           ← Liquid-based date formatting (FR/EN)
-  post_pagination.html       ← intentionally empty (removes prev/next links)
 
 assets/
-  css/main.scss              ← custom styles (lang-switcher, footer, mobile masthead)
+  css/main.scss              ← all custom styles (tokens, dark mode, masthead, home, articles, tags page, footer)
+  fonts/                     ← self-hosted Inter + JetBrains Mono (woff2, latin + latin-ext)
   images/                    ← article images (one subfolder per article)
 ```
 
@@ -61,12 +65,13 @@ assets/
 ---
 layout: single
 title: "Article title"
-excerpt: "Summary displayed on the home page."
+excerpt: "Summary displayed on the home page card."
 date: YYYY-MM-DD
 lang: fr          # or 'en'
 categories: [cat]
-tags: [tag1, tag2]
-cover: /assets/images/YYYY-MM-DD-slug/cover.png  # optional — OG image + display
+tags: [api, cloud]  # pick from the tag list below
+series: "Series name"  # optional — same value on every post of the series
+cover: /assets/images/YYYY-MM-DD-slug/cover.png  # optional — OG image + card + display
 cover_alt: "Image description"                     # optional — alt text (defaults to title)
 cover_caption: "Credit: ..."                       # optional — caption below the image
 ---
@@ -78,13 +83,35 @@ Introduction text...
 {% include cover-image.html %}
 ```
 
-3. **Cover image** (optional): when `cover` is set, Open Graph / Twitter Card meta tags are generated automatically. Use `{% include cover-image.html %}` in the article body to display the image where you want it.
+3. **Cover image** (optional): 1200×630 (Open Graph ratio). When `cover` is set, Open Graph / Twitter Card meta tags are generated automatically and the home card shows it (otherwise a gradient fallback). Use `{% include cover-image.html %}` in the article body to display it.
 
 4. Both files must share **the same slug and date** for the language switcher to work correctly.
 
-4. Commit and push → GitHub Actions rebuilds and deploys automatically.
+5. Commit and push → GitHub Actions rebuilds and deploys automatically.
 
-## Images
+## Tags
+
+Keep the list short and generalist. Current tags (FR / EN):
+
+| FR | EN | Use for |
+| --- | --- | --- |
+| `api` | `api` | APIs, API gateways |
+| `cloud` | `cloud` | hosting, PaaS, deployment |
+| `sécurité` | `security` | auth, vulnerabilities, hardening |
+| `web` | `web` | front-end, HTTP, sites |
+| `ia` | `ai` | AI, LLMs, coding assistants |
+| `devops` | `devops` | CI/CD, tooling |
+| `otoroshi` | `otoroshi` | recurring product |
+| `clever-cloud` | `clever-cloud` | recurring product |
+| `claude` | `claude` | recurring product |
+
+Only add a product tag when it is used by several articles. Generalist tags first, product tags last (the home card shows the first 3).
+
+## Series
+
+Posts sharing the same `series:` value get a navigation box at the end of the article, listing the series posts sorted by file name (prefix them `00-`, `01-`, … when dates collide). Short titles are the post titles with the `series` value and the ` — ` separator removed, so title series posts `"<series> — #1 : …"`.
+
+## Images and figures
 
 - Place images in `assets/images/YYYY-MM-DD-slug/`
 - Reference them in Markdown:
@@ -92,6 +119,15 @@ Introduction text...
 ```liquid
 ![alt]({{ "/assets/images/2026-02-27-slug/image.png" | relative_url }})
 ```
+
+- Charts that must follow dark mode: inline SVG in `_includes/figures/`, using CSS classes styled with the `--text`, `--muted`, `--border`, `--accent` tokens (see `.figure-chart` in `main.scss`), then `{% include figures/<name>.html %}`. An SVG loaded through `<img>` cannot follow the page theme.
+
+## Styling and dark mode
+
+- Colors are CSS custom properties on `:root` (`--bg`, `--surface`, `--text`, `--muted`, `--border`, `--accent`, …), redefined by the `dark-tokens` mixin for `[data-theme="dark"]` and for `prefers-color-scheme: dark` (unless `[data-theme="light"]`).
+- The theme's Sass variables are set before the imports (light values only): MM uses them inside Sass color functions, so they cannot be CSS variables. Any MM rule that hardcodes a color must be rewired to a token in the "Base colors" section of `main.scss`.
+- The toggle stores the choice in `localStorage` (`theme`); with no choice, the system preference applies.
+- MM floats `.page__content` and the article footer: blocks added after them need `clear: both`.
 
 ## Multilingual — gotchas
 

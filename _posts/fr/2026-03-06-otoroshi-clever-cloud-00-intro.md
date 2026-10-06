@@ -5,7 +5,7 @@ excerpt: "Otoroshi est une API gateway open source bourrée de plugins. Clever C
 date: 2026-03-06
 lang: fr
 categories: [otoroshi, clever-cloud]
-tags: [otoroshi, clever-cloud, api-gateway, api-management]
+tags: [api, cloud, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-06-otoroshi-clever-cloud-00-intro/cover.png
 ---

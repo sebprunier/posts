@@ -5,7 +5,7 @@ excerpt: "The Aux Alentours par MAIF API deployed on Clever Cloud, exposed throu
 date: 2026-03-06
 lang: en
 categories: [otoroshi, clever-cloud]
-tags: [otoroshi, clever-cloud, api-gateway, api-management, api-keys, routing]
+tags: [api, cloud, security, otoroshi, clever-cloud]
 series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-06-otoroshi-clever-cloud-01-one-app-three-routes/cover.png
 ---

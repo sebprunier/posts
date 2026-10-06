@@ -5,7 +5,7 @@ excerpt: "This article covers how I created and deployed a custom Keycloak theme
 date: 2026-03-02
 lang: en
 categories: [keycloak, ai]
-tags: [keycloak, claude-code, freemarker, clever-cloud, spring-boot]
+tags: [ai, security, web, cloud, clever-cloud, claude]
 cover: /assets/images/2026-02-27-theme-keycloak-ia/cover.jpg
 ---
 
