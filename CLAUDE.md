@@ -101,6 +101,7 @@ Keep the list short and generalist. Current tags (FR / EN):
 | `web` | `web` | front-end, HTTP, sites |
 | `ia` | `ai` | AI, LLMs, coding assistants |
 | `devops` | `devops` | CI/CD, tooling |
+| `open-source` | `open-source` | open source projects, open data |
 | `otoroshi` | `otoroshi` | recurring product |
 | `clever-cloud` | `clever-cloud` | recurring product |
 | `claude` | `claude` | recurring product |
