@@ -4,6 +4,7 @@ title: "About"
 permalink: /about/
 lang: en
 locale: "en-US"
+description: "Sébastien Prunier, developer at Serli and town councillor in Colombiers (Vienne, France)."
 ---
 
 <div class="about-card">

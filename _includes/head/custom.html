@@ -9,12 +9,6 @@
 </script>
 <link rel="preload" href="{{ '/assets/fonts/inter-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
-{% if page.cover %}
-  {% assign cover_url = page.cover | prepend: site.baseurl | prepend: site.url %}
-  <meta property="og:image" content="{{ cover_url }}" />
-  <meta name="twitter:image" content="{{ cover_url }}" />
-  <meta name="twitter:card" content="summary_large_image" />
-{% endif %}
 
 <script type="module">
   // Mermaid is only loaded on pages that contain a diagram, and follows the light/dark theme

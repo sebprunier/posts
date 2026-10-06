@@ -42,10 +42,11 @@ _includes/
   cover-image.html           ← optional cover image (OG + display in article)
   icon.html                  ← inline SVG icons (calendar, clock, linkedin, x, github, rss) — no Font Awesome
   head.html                  ← MM override: the theme's head without the Font Awesome stylesheet
+  seo.html                   ← MM override: language-aware canonical/og:url, hreflang links, share image (cover or default)
   masthead.html              ← MM override: accent on "/blog", lang switcher, dark mode toggle, mobile hamburger
   footer.html                ← MM override: social links + bilingual copyright
   footer/custom.html         ← intentionally empty (prevents double rendering)
-  head/custom.html           ← OG image, font preload, theme init (no flash), code block copy button, mermaid (loaded only when a page has a diagram)
+  head/custom.html           ← font preload, theme init (no flash), code block copy button, mermaid (loaded only when a page has a diagram)
   page__meta.html            ← MM override: uses page.locale
   page__date.html            ← MM override: uses page.locale + custom_date.html
   custom_date.html           ← Liquid-based date formatting (FR/EN)
@@ -53,7 +54,8 @@ _includes/
 assets/
   css/main.scss              ← all custom styles (tokens, dark mode, masthead, home, articles, tags page, footer)
   fonts/                     ← self-hosted Inter + JetBrains Mono (woff2, latin + latin-ext)
-  images/                    ← article images (one subfolder per article), about/avatar.jpg
+  images/                    ← article images (one subfolder per article), about/avatar.jpg,
+                               og/og-default-{fr,en}.jpg (share image for pages without cover)
 ```
 
 ## Adding an article
@@ -83,7 +85,7 @@ Introduction text...
 {% include cover-image.html %}
 ```
 
-3. **Cover image** (optional): 1200×630 (Open Graph ratio). When `cover` is set, Open Graph / Twitter Card meta tags are generated automatically and the home card shows it (otherwise a gradient fallback). Use `{% include cover-image.html %}` in the article body to display it.
+3. **Cover image** (optional): 1200×630 (Open Graph ratio). When `cover` is set, it becomes the Open Graph / Twitter Card image (`cover_alt` as alt text) and the home card shows it; otherwise the share image is `og-default-<lang>.jpg` and the card uses a gradient fallback. Use `{% include cover-image.html %}` in the article body to display it.
 
 4. Both files must share **the same slug and date** for the language switcher (in the masthead) to work correctly.
 
@@ -138,7 +140,8 @@ Mermaid diagrams go in a raw `<pre class="mermaid">…</pre>` block. The library
 
 - **`site.active_lang`**: polyglot variable (language of the current build). Prefer over `page.lang` inside cached includes.
 - **URLs in cached includes**: never use `page.url` inside an include called via `{% include_cached %}` — the value is frozen on first render. Use JavaScript + `window.location.href` instead.
-- **Polyglot post-processing**: in the EN build, polyglot appends `/en/` to all relative URLs in the final HTML. Cross-language links must be built in JS at runtime to bypass this.
+- **Polyglot post-processing**: in the EN build, polyglot appends `/en/` to all relative URLs in the final HTML, and to absolute `href`s too (except right after `hreflang="fr" ` or `rel="canonical" `). Cross-language links must be built in JS at runtime, or written with `ferh="…"` instead of `href="…"` (polyglot turns it back into `href` untouched). Absolute URLs in `content="…"` (og:url…) are not rewritten: `seo.html` adds the `/en` prefix itself.
+- **SEO**: every page has a canonical URL in its own language plus `hreflang` alternates (fr, en, x-default = fr). Pages need a `description` in front matter, otherwise the FR site description is used.
 - **Filter posts by language**: `site.posts | where: "lang", site.active_lang`
 - **Dates**: use `{% include custom_date.html date=page.date lang=page.lang %}` for localized formatting without any system locale dependency.
 

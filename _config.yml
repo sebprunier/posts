@@ -3,6 +3,9 @@ description: "Retours d'expérience tech"
 author:
   name: "Sébastien Prunier"
 
+twitter:
+  username: "sebprunier"
+
 url: "https://sebprunier.github.io"
 baseurl: "/posts"
 
