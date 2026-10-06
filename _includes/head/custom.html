@@ -20,3 +20,32 @@
   import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
   mermaid.initialize({ startOnLoad: true, theme: 'neutral' });
 </script>
+
+<script>
+  // Code blocks: header with the language name and a copy button
+  document.addEventListener('DOMContentLoaded', function () {
+    var labels = {% if site.active_lang == 'en' %}{ copy: 'Copy', copied: 'Copied!' }{% else %}{ copy: 'Copier', copied: 'Copié !' }{% endif %};
+    document.querySelectorAll('.page__content div.highlighter-rouge').forEach(function (block) {
+      var match = block.className.match(/language-(\S+)/);
+      var header = document.createElement('div');
+      header.className = 'code-header';
+      var lang = document.createElement('span');
+      lang.className = 'code-header__lang';
+      lang.textContent = match && match[1] !== 'plaintext' ? match[1] : '';
+      var button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'code-header__copy';
+      button.textContent = labels.copy;
+      button.addEventListener('click', function () {
+        var pre = block.querySelector('.rouge-code pre') || block.querySelector('pre');
+        navigator.clipboard.writeText(pre.innerText).then(function () {
+          button.textContent = labels.copied;
+          setTimeout(function () { button.textContent = labels.copy; }, 1500);
+        });
+      });
+      header.appendChild(lang);
+      header.appendChild(button);
+      block.insertBefore(header, block.firstChild);
+    });
+  });
+</script>

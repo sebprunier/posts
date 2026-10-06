@@ -6,6 +6,7 @@ date: 2026-03-16
 lang: en
 categories: [otoroshi, clever-cloud]
 tags: [otoroshi, clever-cloud, cors, robots, redirect, iframe, http]
+series: "Last Night Otoroshi Saved My Life"
 cover: /assets/images/2026-03-16-otoroshi-clever-cloud-02-http-daily/cover.png
 ---
 

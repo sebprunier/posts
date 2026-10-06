@@ -1,0 +1,18 @@
+{%- comment -%} Replaces the theme's prev/next links: shows the series navigation when the post belongs to one {%- endcomment -%}
+{%- if page.series -%}
+  {%- assign series_posts = site.posts | where: "series", page.series | where: "lang", page.lang | sort: "path" -%}
+  <nav class="series-nav" aria-label="{% if page.lang == 'en' %}Series{% else %}Série{% endif %}">
+    <p class="series-nav__label">{% if page.lang == 'en' %}Series{% else %}Série{% endif %} · {{ series_posts.size }} articles</p>
+    <p class="series-nav__title">{{ page.series }}</p>
+    <ol class="series-nav__list">
+      {%- for post in series_posts -%}
+        {%- assign short_title = post.title | remove_first: page.series | remove_first: " — " -%}
+        {%- if post.url == page.url -%}
+          <li class="series-nav__item series-nav__item--current" aria-current="page"><span>{{ short_title }}</span></li>
+        {%- else -%}
+          <li class="series-nav__item"><a href="{{ post.url | relative_url }}">{{ short_title }}</a></li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ol>
+  </nav>
+{%- endif -%}
