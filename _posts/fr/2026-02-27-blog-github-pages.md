@@ -6,11 +6,15 @@ date: 2026-02-27
 lang: fr
 categories: [blog, jekyll]
 tags: [web, devops]
+cover: /assets/images/2026-02-27-blog-github-pages/cover.jpg
+cover_alt: "Illustration : des feuilles Markdown passent dans une presse d'imprimerie et ressortent en pages web, publiées automatiquement"
 ---
 
 {% include lang-switcher.html %}
 
 J'avais envie d'un endroit simple pour publier des retours d'expérience tech, sans infrastructure à gérer. [GitHub Pages](https://docs.github.com/fr/pages) + [Jekyll](https://jekyllrb.com/) s'est imposé naturellement : gratuit, versionné, déployé automatiquement à chaque push.
+
+{% include cover-image.html %}
 
 Ce blog a été mis en place en collaboration avec [Claude Code](https://claude.ai/code), le CLI d'Anthropic. De l'initialisation du projet jusqu'au débogage du switcher de langue, Claude Code a été l'interlocuteur technique tout au long de la session — un bon exemple de ce qu'on peut accomplir en pair-programming avec un assistant IA. Voici les principales étapes.
 
