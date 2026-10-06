@@ -1,3 +1,12 @@
+<script>
+  // Apply the saved theme before first paint (no flash); otherwise CSS follows the system preference
+  (function () {
+    try {
+      var t = localStorage.getItem('theme');
+      if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  })();
+</script>
 <link rel="preload" href="{{ '/assets/fonts/inter-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
 {% if page.cover %}

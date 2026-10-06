@@ -59,24 +59,244 @@ $navicon-link-color-hover: #4f46e5;
 }
 
 :root {
+  color-scheme: light;
   --bg: #ffffff;
   --surface: #f7f8fb;
   --text: #1d2230;
   --muted: #5f6577;
   --border: #e6e8ee;
+  --border-strong: #cfd3dd;
   --accent: #4f46e5;
   --accent-hover: #4338ca;
   --accent-soft: #eef0ff;
   --accent-gradient: linear-gradient(120deg, #4f46e5 0%, #9333ea 55%, #0891b2 100%);
+  --code-inline-bg: #f1f2f7;
   --masthead-bg: rgba(255, 255, 255, 0.82);
   --card-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 1px 3px rgba(16, 24, 40, 0.06);
   --card-shadow-hover: 0 16px 32px -12px rgba(16, 24, 40, 0.22);
   --content-width: 1100px;
 }
 
+@mixin dark-tokens {
+  color-scheme: dark;
+  --bg: #0d0f17;
+  --surface: #151826;
+  --text: #e4e6ee;
+  --muted: #9aa1b5;
+  --border: #252a3b;
+  --border-strong: #353b50;
+  --accent: #8b93ff;
+  --accent-hover: #aab0ff;
+  --accent-soft: rgba(139, 147, 255, 0.14);
+  --accent-gradient: linear-gradient(120deg, #8b93ff 0%, #c084fc 55%, #22d3ee 100%);
+  --code-inline-bg: #1c2031;
+  --masthead-bg: rgba(13, 15, 23, 0.78);
+  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+  --card-shadow-hover: 0 18px 36px -12px rgba(0, 0, 0, 0.7);
+}
+
+:root[data-theme="dark"] {
+  @include dark-tokens;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-tokens;
+  }
+}
+
+/* ==========================================================================
+   Base colors — theme rules rewired to the tokens above (light and dark)
+   ========================================================================== */
+
+html {
+  background-color: var(--bg);
+}
+
 body {
+  color: var(--text);
+  background-color: var(--bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+::selection {
+  background: var(--accent-soft);
+}
+
+a {
+  color: var(--accent);
+
+  &:visited {
+    color: var(--accent);
+  }
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+hr {
+  border-top-color: var(--border);
+}
+
+.page__content :not(pre) > code,
+p > code,
+a > code,
+li > code,
+figcaption > code,
+td > code {
+  color: var(--text);
+  background: var(--code-inline-bg);
+}
+
+table {
+  border-color: var(--border);
+}
+
+thead {
+  background-color: var(--surface);
+  border-bottom-color: var(--border-strong);
+}
+
+td {
+  border-bottom-color: var(--border);
+}
+
+.page__meta,
+.page__taxonomy,
+.archive__item-excerpt,
+.archive__subtitle,
+.taxonomy__title,
+.taxonomy__count,
+.back-to-top,
+figcaption {
+  color: var(--muted);
+}
+
+.page__title a,
+.greedy-nav a,
+u,
+ins {
+  color: var(--text);
+}
+
+.page__share,
+.page__related,
+.taxonomy__section:not(:last-child) {
+  border-color: var(--border);
+}
+
+.greedy-nav__toggle::before {
+  background-color: var(--bg);
+}
+
+.page__content h2,
+.archive__subtitle {
+  border-bottom-color: var(--border);
+}
+
+.taxonomy__index a,
+.taxonomy__section {
+  border-color: var(--border);
+}
+
+.archive__item-title a,
+.taxonomy__index a {
+  color: var(--text);
+}
+
+// Mermaid diagrams use a light palette: keep them on a light card in both modes
+pre.mermaid {
+  padding: 1em;
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+
+// Inline SVG charts follow the theme tokens
+.figure-chart {
+  margin: 1.5em 0;
+  padding: 0.5em;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+
+  svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    font-family: inherit;
+    font-size: 13px;
+  }
+
+  .tl-title { font-size: 15px; font-weight: 600; fill: var(--text); }
+  .tl-sub { font-size: 11.5px; fill: var(--muted); }
+  .tl-grid { stroke: var(--border); }
+  .tl-axis { stroke: var(--border-strong); stroke-width: 1.25; }
+  .tl-month { font-size: 11px; text-anchor: middle; fill: var(--muted); }
+  .tl-exploit { stroke: var(--accent); stroke-width: 1.5; stroke-dasharray: 4 4; }
+  .tl-exploit-label { font-size: 11.5px; font-weight: 600; text-anchor: middle; fill: var(--accent); }
+  .tl-bar { stroke-width: 1.25; fill-opacity: 0.18; }
+  .tl-bar--missed { fill: #e5484d; stroke: #e5484d; }
+  .tl-bar--found { fill: #30a46c; stroke: #30a46c; }
+  .tl-bar-label { font-size: 11.5px; font-weight: 600; fill: var(--text); }
+  .tl-row { fill: var(--text); }
+  .tl-row--strong { font-weight: 600; }
+}
+
+/* ==========================================================================
+   Theme toggle
+   ========================================================================== */
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2em;
+  height: 2em;
+  margin-left: 0.6em;
+  padding: 0;
+  color: var(--muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  svg {
+    width: 1em;
+    height: 1em;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .theme-toggle__sun {
+    display: none;
+  }
+}
+
+@mixin dark-toggle {
+  .theme-toggle__moon { display: none; }
+  .theme-toggle__sun { display: block; }
+}
+
+:root[data-theme="dark"] {
+  @include dark-toggle;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    @include dark-toggle;
+  }
 }
 
 // Desktop: smaller body text (theme goes up to 22px on wide screens)
@@ -165,6 +385,27 @@ li.masthead__lang-switcher {
     &:hover {
       opacity: 1;
     }
+  }
+}
+
+.greedy-nav .hidden-links {
+  background: var(--bg);
+  border-color: var(--border);
+
+  &::before {
+    border-color: var(--border) transparent;
+  }
+
+  &::after {
+    border-color: var(--bg) transparent;
+  }
+
+  a {
+    color: var(--text);
+  }
+
+  li {
+    border-bottom-color: var(--border);
   }
 }
 
