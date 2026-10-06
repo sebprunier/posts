@@ -1,0 +1,28 @@
+{% assign p = include.post %}
+{% assign words = p.content | strip_html | number_of_words %}
+{% assign minutes = words | divided_by: 200 | at_least: 1 %}
+<article class="post-card{% if include.featured %} post-card--featured{% endif %}">
+  <a class="post-card__link" href="{{ p.url | relative_url }}">
+    <div class="post-card__media">
+      {% if p.cover %}
+        <img src="{{ p.cover | relative_url }}" alt="" {% if include.featured %}fetchpriority="high"{% else %}loading="lazy"{% endif %}>
+      {% else %}
+        <div class="post-card__placeholder" aria-hidden="true"></div>
+      {% endif %}
+    </div>
+    <div class="post-card__body">
+      <p class="post-card__meta">
+        <time datetime="{{ p.date | date_to_xmlschema }}">{% include custom_date.html date=p.date lang=p.lang %}</time>
+        <span aria-hidden="true">·</span>
+        {{ minutes }} min{% if p.lang == 'en' %} read{% else %} de lecture{% endif %}
+      </p>
+      <h2 class="post-card__title">{{ p.title }}</h2>
+      <p class="post-card__excerpt">{{ p.excerpt | strip_html | strip }}</p>
+      {% if p.tags.size > 0 %}
+        <ul class="post-card__tags">
+          {% for tag in p.tags limit: 3 %}<li>{{ tag }}</li>{% endfor %}
+        </ul>
+      {% endif %}
+    </div>
+  </a>
+</article>

@@ -1,21 +1,25 @@
 ---
-layout: archive
+layout: default
 ---
 
-{{ content }}
+{% assign posts = site.posts | where: "lang", site.active_lang %}
 
-{% assign ui_locale = page.locale | default: site.locale %}
-<h3 class="archive__subtitle">{{ site.data.ui-text[ui_locale].recent_posts | default: "Recent Posts" }}</h3>
+<main id="main" class="home" role="main">
+  <header class="home-hero">
+    {% if site.active_lang == 'en' %}
+      <h1 class="home-hero__title">Hands-on <span class="home-hero__accent">tech</span> notes</h1>
+      <p class="home-hero__lead">Field notes by {{ site.author.name }}: APIs, cloud, security and AI — what works, what breaks, and why.</p>
+    {% else %}
+      <h1 class="home-hero__title">Retours d'expérience <span class="home-hero__accent">tech</span></h1>
+      <p class="home-hero__lead">Les notes de terrain de {{ site.author.name }} : API, cloud, sécurité et IA — ce qui marche, ce qui casse, et pourquoi.</p>
+    {% endif %}
+  </header>
 
-{% if paginator %}
-  {% assign posts = paginator.posts | where: "lang", site.active_lang %}
-{% else %}
-  {% assign posts = site.posts | where: "lang", site.active_lang %}
-{% endif %}
+  {{ content }}
 
-{% assign entries_layout = page.entries_layout | default: 'list' %}
-<div class="entries-{{ entries_layout }}">
-  {% include documents-collection.html entries=posts type=entries_layout %}
-</div>
-
-{% include paginator.html %}
+  <div class="post-grid">
+    {% for post in posts %}
+      {% include post-card.html post=post featured=forloop.first %}
+    {% endfor %}
+  </div>
+</main>
