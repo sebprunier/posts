@@ -351,6 +351,11 @@ pre.mermaid {
   }
 }
 
+// Anchor targets land below the sticky masthead (~3.5rem tall at every width)
+html {
+  scroll-padding-top: 4.5rem;
+}
+
 .greedy-nav {
   background: transparent;
 

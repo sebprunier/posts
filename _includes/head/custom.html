@@ -9,6 +9,22 @@
 </script>
 <link rel="preload" href="{{ '/assets/fonts/inter-latin.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
+<script>
+  // Same-page anchor links: native scrollIntoView honors scroll-padding-top (sticky masthead),
+  // and preventDefault makes the theme's SmoothScroll (fixed 20px offset) skip the click
+  window.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    var a = e.target.closest && e.target.closest('a[href*="#"]');
+    if (!a || !a.hash || a.hostname !== location.hostname || a.pathname !== location.pathname) return;
+    var target = document.getElementById(decodeURIComponent(a.hash.slice(1)));
+    if (!target) return;
+    e.preventDefault();
+    if (location.hash !== a.hash) history.pushState(null, '', a.hash);
+    var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth' });
+  }, true);
+</script>
+
 
 <script type="module">
   // Mermaid is only loaded on pages that contain a diagram, and follows the light/dark theme
